@@ -30,7 +30,14 @@
       fetchpriority="high"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Great+Vibes&family=Jost:wght@300;400;500&family=Tiro+Devanagari+Sanskrit&display=swap"
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Parisienne&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Devanagari is a large charset and this page uses exactly one line of it,
+         so it gets its own request subset to just those glyphs via &text=.
+         (&text= applies to the whole request, hence the separate link.) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&text=%E0%A4%B6%E0%A5%8D%E0%A4%B0%E0%A5%80%20%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%B5%E0%A5%80%E0%A4%B0%E0%A4%BE%E0%A4%AF%20%E0%A4%A8%E0%A4%AE%E0%A4%83&display=swap"
       rel="stylesheet"
     />
 
@@ -60,9 +67,14 @@
         --ink-faint: rgba(58, 42, 34, 0.68);
         --night: #12213d;
 
-        --serif:
-          "Cormorant Garamond", "Iowan Old Style", Palatino, Georgia, serif;
-        --script: "Great Vibes", "Snell Roundhand", "Apple Chancery", cursive;
+        /* EB Garamond, not Cormorant: same Garamond feel, but Cormorant is a
+           display face — high stroke contrast, small x-height — and half these
+           usages are ~1rem italic body copy where its hairlines disappear. */
+        --serif: "EB Garamond", "Iowan Old Style", Palatino, Georgia, serif;
+        /* Parisienne over Great Vibes: more even stroke weight, which matters
+           because most script usages here are mid-size (1–2.5rem), not just the
+           big hero names. Swap this one line to change the script everywhere. */
+        --script: "Parisienne", "Snell Roundhand", "Apple Chancery", cursive;
         --sans:
           "Jost", "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
         --deva:
@@ -79,6 +91,11 @@
         --measure: min(100%, 60rem);
 
         --rosette: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g fill='%23EFD494' stroke='%238A6716' stroke-width='.7'><circle cx='12' cy='6.4' r='3.3'/><circle cx='12' cy='17.6' r='3.3'/><circle cx='6.4' cy='12' r='3.3'/><circle cx='17.6' cy='12' r='3.3'/></g><circle cx='12' cy='12' r='2.9' fill='%23C9A227' stroke='%238A6716' stroke-width='.7'/></svg>");
+        /* Corner botanical for the ceremony cards. Drawn solid black because it
+           is used as a MASK — the visible colour comes from background-color, so
+           each ceremony can tint it. Anchored top-left; CSS mirrors it into the
+           other three corners. */
+        --spray: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g fill='%23000' stroke='%23000' stroke-linecap='round'><path d='M2,60 C16,53 28,41 36,25 C40,17 42,10 43,3' stroke-width='2.2' fill='none'/><path d='M5,41 C18,45 31,45 45,38' stroke-width='1.6' fill='none'/><path d='M21,13 C26,26 33,35 45,41' stroke-width='1.6' fill='none'/><ellipse cx='15' cy='49' rx='8' ry='3.6' transform='rotate(-34 15 49)'/><ellipse cx='26' cy='36' rx='7.4' ry='3.4' transform='rotate(-43 26 36)'/><ellipse cx='34' cy='17' rx='6.6' ry='3' transform='rotate(-64 34 17)'/><ellipse cx='35' cy='42' rx='7' ry='3.2' transform='rotate(14 35 42)'/><ellipse cx='17' cy='30' rx='6' ry='2.8' transform='rotate(-16 17 30)'/><g transform='translate(44,9)'><circle cx='0' cy='-5' r='3.6'/><circle cx='0' cy='5' r='3.6'/><circle cx='-5' cy='0' r='3.6'/><circle cx='5' cy='0' r='3.6'/><circle cx='0' cy='0' r='2.8'/></g><g transform='translate(7,64)'><circle cx='0' cy='-4.2' r='3'/><circle cx='0' cy='4.2' r='3'/><circle cx='-4.2' cy='0' r='3'/><circle cx='4.2' cy='0' r='3'/><circle cx='0' cy='0' r='2.3'/></g><g transform='translate(49,40)'><circle cx='0' cy='-3.4' r='2.5'/><circle cx='0' cy='3.4' r='2.5'/><circle cx='-3.4' cy='0' r='2.5'/><circle cx='3.4' cy='0' r='2.5'/><circle cx='0' cy='0' r='1.9'/></g></g></svg>");
       }
 
       *,
@@ -243,135 +260,160 @@
    glowing card in the mouth, "TAP TO REVEAL", white flash out.
    [hidden] in markup; JS shows it. No JS → straight to the page.
    ============================================================ */
+      /* ------------------------------------------------------------
+         1 · ENVELOPE — full-bleed. The screen IS the envelope: olive
+         ground, gold foliage hanging from the top, monogram in the
+         middle, and a scalloped V flap with a pearl clasp at the
+         bottom. Tap swings the flap open, then the whole thing lifts
+         to reveal the hero. Foliage and flap are drawn in JS at pixel
+         size so their circles stay circular.
+         ------------------------------------------------------------ */
       .env {
         position: fixed;
         inset: 0;
         z-index: 150;
         overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        perspective: 1400px;
         background:
           radial-gradient(
-            60% 40% at 50% 42%,
-            rgba(232, 206, 143, 0.22),
+            75% 45% at 50% 38%,
+            rgba(232, 206, 143, 0.13),
             transparent 70%
           ),
-          radial-gradient(
-            120% 90% at 50% 50%,
-            #241c0b 0%,
-            #140f06 70%,
-            #0b0803 100%
-          );
+          linear-gradient(170deg, #767b55 0%, #656a46 45%, #4e5334 100%);
         transition: opacity 0.7s var(--ease);
       }
-      .env.is-gone {
-        opacity: 0;
-      }
-      /* gold bokeh specks */
+      /* woven-cloth tooth, very faint */
       .env::before {
         content: "";
         position: absolute;
         inset: 0;
         pointer-events: none;
-        opacity: 0.55;
+        opacity: 0.5;
         background-image:
-          radial-gradient(2.5px 2.5px at 12% 22%, #e8ce8f, transparent),
-          radial-gradient(3px 3px at 82% 16%, #c9a961, transparent),
-          radial-gradient(2px 2px at 26% 74%, #e8ce8f, transparent),
-          radial-gradient(3.5px 3.5px at 68% 82%, #b8974e, transparent),
-          radial-gradient(2px 2px at 46% 12%, #e8ce8f, transparent),
-          radial-gradient(2.5px 2.5px at 92% 60%, #c9a961, transparent),
-          radial-gradient(2px 2px at 6% 52%, #e8ce8f, transparent),
-          radial-gradient(3px 3px at 56% 92%, #c9a961, transparent);
-        filter: blur(0.4px);
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.028) 0 1px,
+            transparent 1px 3px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.035) 0 1px,
+            transparent 1px 3px
+          );
       }
-      .env-stage {
-        position: relative;
-        width: min(88vw, 430px);
-        aspect-ratio: 1/1.34;
-        filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.55));
+      .env.is-gone {
+        opacity: 0;
       }
-      .env-stage > * {
+      .env-foliage {
         position: absolute;
-      }
-      /* flap base must land exactly on the envelope mouth (26%): -12% + 38% = 26% */
-      .env-flap {
-        top: -12%;
         left: 0;
-        width: 100%;
-        height: 38%;
-        z-index: 1;
+        right: 0;
+        top: 0;
+        height: 34%;
+        pointer-events: none;
       }
-      .env-body {
-        inset: 26% 0 0 0;
-        z-index: 3;
-      }
-      .env-card {
-        left: 8%;
-        right: 8%;
-        top: 6%;
-        bottom: 26%;
-        z-index: 2;
-        border-radius: 3px;
-        background: linear-gradient(
-          180deg,
-          #fffdf7 0%,
-          #fff6e2 55%,
-          #f6e3be 100%
-        );
-        box-shadow:
-          0 0 44px 12px rgba(255, 238, 190, 0.7),
-          0 0 120px 30px rgba(232, 206, 143, 0.35);
-        transition:
-          transform 1s var(--ease),
-          opacity 0.6s var(--ease);
-        /* only the top ~30% of the card clears the envelope body, so the
-     monogram sits near the card's top edge, not its centre */
-        display: grid;
-        place-items: start center;
-        padding-top: 5%;
-      }
-      .env-card span {
-        font-family: var(--script);
-        font-size: clamp(1.5rem, 6vw, 2.2rem);
-        color: var(--rose);
-        opacity: 0.85;
-      }
-      .env svg {
+      .env-foliage svg,
+      .env-flap svg {
         width: 100%;
         height: 100%;
         display: block;
         overflow: visible;
       }
-      .env-gold {
-        fill: url(#goldGrad);
-        stroke: #7e6428;
-        stroke-width: 1;
-        vector-effect: non-scaling-stroke;
+      .env-inner {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 34%;
+        text-align: center;
+        padding-inline: var(--gutter);
+        transition:
+          opacity 0.6s var(--ease),
+          transform 0.9s var(--ease);
       }
-      .env-gold-dk {
-        fill: url(#goldGradDk);
-        stroke: #6b5426;
-        stroke-width: 1;
-        vector-effect: non-scaling-stroke;
+      .env-mono {
+        margin: 0;
+        font-family: var(--serif);
+        font-weight: 400;
+        font-size: clamp(4.5rem, 26vw, 9rem);
+        line-height: 0.9;
+        letter-spacing: -0.04em;
+        color: #f0cd7c;
+        text-shadow: 0 4px 22px rgba(30, 24, 6, 0.45);
+      }
+      /* the script sits slightly over the monogram, as on the reference */
+      .env-names {
+        margin: -0.35em 0 0;
+        font-family: var(--script);
+        font-size: clamp(1.35rem, 6vw, 2.1rem);
+        color: #f7e6bd;
+        text-shadow: 0 2px 12px rgba(30, 24, 6, 0.5);
+      }
+      .env-div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        margin-top: clamp(0.9rem, 3vh, 1.4rem);
+      }
+      .env-div::before,
+      .env-div::after {
+        content: "";
+        height: 1px;
+        width: clamp(2rem, 12vw, 4.5rem);
+        background: linear-gradient(90deg, transparent, #d9bd77, transparent);
+      }
+      .env-div i {
+        width: 7px;
+        height: 7px;
+        transform: rotate(45deg);
+        background: #e8ce8f;
+        display: block;
       }
       .env-hint {
         position: absolute;
         left: 50%;
-        bottom: clamp(2rem, 8vh, 4.5rem);
         transform: translateX(-50%);
         margin: 0;
-        font-size: 0.66rem;
+        font-size: 0.64rem;
         font-weight: 500;
         text-transform: uppercase;
-        letter-spacing: 0.34em;
-        color: #f2e2b8;
+        letter-spacing: 0.36em;
         white-space: nowrap;
-        transition: opacity 0.4s;
+        color: #f2e2b8;
+        text-shadow: 0 2px 10px rgba(30, 24, 6, 0.55);
+        animation: hintPulse 2.6s ease-in-out 1s infinite;
+        transition: opacity 0.35s var(--ease);
+      }
+      @keyframes hintPulse {
+        0%,
+        100% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 1;
+        }
       }
       .env-hint.is-out {
         opacity: 0;
+        animation: none;
+      }
+      /* the flap hinges on its own top edge */
+      .env-flap {
+        position: absolute;
+        left: 0;
+        right: 0;
+        transform-origin: 50% 0;
+        transform-style: preserve-3d;
+        will-change: transform;
+        transition: transform 1s var(--ease);
+      }
+      .env.is-opening .env-flap {
+        transform: rotateX(-168deg);
+      }
+      .env.is-opening .env-inner {
+        opacity: 0;
+        transform: translateY(-18px);
       }
       .env-tap {
         position: absolute;
@@ -389,7 +431,7 @@
         background: transparent;
         border: 0;
         cursor: pointer;
-        color: rgba(242, 226, 184, 0.65);
+        color: rgba(242, 226, 184, 0.6);
         font-size: 0.6rem;
         text-transform: uppercase;
         letter-spacing: 0.24em;
@@ -397,27 +439,6 @@
       }
       .env-skip:hover {
         color: #f2e2b8;
-      }
-      .env.is-opening .env-card {
-        transform: translateY(-16%) scale(1.55);
-        opacity: 0.96;
-      }
-      .env-flash {
-        position: absolute;
-        inset: 0;
-        z-index: 20;
-        pointer-events: none;
-        opacity: 0;
-        background: radial-gradient(
-          60% 45% at 50% 46%,
-          #ffffff 0%,
-          #fff6e0 45%,
-          rgba(255, 246, 224, 0) 78%
-        );
-        transition: opacity 0.55s ease-in;
-      }
-      .env.is-flash .env-flash {
-        opacity: 1;
       }
 
       /* ============================================================
@@ -652,9 +673,12 @@
             transparent 2px 7px
           ),
           linear-gradient(180deg, #4a1c22 0%, #3a151b 50%, #2c0f14 100%);
+        /* Promote to a compositor layer at boot. Without this the layer is
+           created on the same frame the swing starts, which drops frames. */
+        will-change: transform, filter;
         transition:
-          transform 1.5s var(--ease),
-          filter 1.5s var(--ease);
+          transform 1.2s var(--ease),
+          filter 1.2s var(--ease);
       }
       .door-l {
         left: 0;
@@ -764,7 +788,7 @@
         pointer-events: none;
       }
       .doors.is-open .door-seam {
-        animation: seam 1.5s var(--ease) forwards;
+        animation: seam 1.2s var(--ease) forwards;
       }
       @keyframes seam {
         0% {
@@ -1086,16 +1110,7 @@
       /* ============================================================
    5 · EVENT POSTER CARDS
    ============================================================ */
-      .posters {
-        background: var(--cream);
-      }
-      .poster {
-        margin-top: clamp(2.5rem, 7vh, 4rem);
-      }
-      .poster-head {
-        margin-bottom: 1.1rem;
-      }
-      .poster-date {
+      .cel-date {
         margin: 0;
         font-size: 0.6rem;
         font-weight: 500;
@@ -1103,126 +1118,97 @@
         letter-spacing: 0.28em;
         color: var(--rose-lit);
       }
-      .poster-name {
+      .cel-name {
         font-family: var(--script);
         color: var(--rose);
         font-size: clamp(1.75rem, 6vw, 2.5rem);
         margin: 0.1rem 0 0;
       }
-      .poster-tag {
+      .cel-tag {
         font-family: var(--script);
         color: var(--gold-deep);
         font-size: clamp(1rem, 3.2vw, 1.25rem);
-        margin: 0;
+        margin: 0 0 0.7rem;
       }
-      .poster-card {
+      /* Holds either the illustration or the designed colour card. Same box
+         either way, so swapping CONFIG.events[].art changes nothing else. */
+      .cel-art {
         position: relative;
-        width: min(100%, 340px);
-        margin-inline: auto;
+        width: 100%;
         aspect-ratio: 3/4.4;
-        border-radius: 14px;
         overflow: hidden;
-        background: var(--night);
-        border: 5px solid #fff;
-        box-shadow: 0 18px 44px rgba(58, 42, 34, 0.26);
+        border-radius: 2px;
       }
-      .poster-card img {
+      .cel-art img {
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: var(--pos, 50% 50%);
       }
-      /* fallback scene inside a poster when no artwork is set */
-      .poster-fallback {
+      /* Designed card shown when no artwork is set. Each ceremony supplies its
+         own two-stop ground and accent via CONFIG.events[].ground/.accent, so
+         the five read as a set rather than five identical navy blocks. */
+      .cel-ground {
         position: absolute;
         inset: 0;
         background:
           radial-gradient(
-            80% 50% at 50% 88%,
-            rgba(242, 169, 59, 0.5),
+            85% 55% at 50% 92%,
+            rgba(0, 0, 0, 0.35),
             transparent 70%
           ),
-          linear-gradient(180deg, #16294a 0%, #1d3459 52%, #241a3c 100%);
+          linear-gradient(
+            170deg,
+            var(--g1, #1d3459) 0%,
+            var(--g2, #16294a) 100%
+          );
       }
-      .poster-lights {
+      /* One botanical spray, mirrored into all four corners. mask-image rather
+         than background-image so the accent colour can change per ceremony;
+         a fixed-colour data URI could not. */
+      .cel-spray {
         position: absolute;
-        left: 0;
-        right: 0;
+        width: 34%;
+        aspect-ratio: 1;
+        background-color: var(--accent, #efd494);
+        opacity: 0.85;
+        -webkit-mask-image: var(--spray);
+        mask-image: var(--spray);
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+      }
+      .cel-spray.tl {
         top: 0;
-        height: 32%;
-      }
-      .poster-lights svg {
-        width: 100%;
-        height: 100%;
-        display: block;
-        overflow: visible;
-      }
-      .poster-ph {
-        position: absolute;
         left: 0;
-        right: 0;
-        bottom: 14%;
-        text-align: center;
-        font-size: 0.6rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: rgba(255, 241, 230, 0.55);
       }
-      .poster-txt {
-        position: absolute;
+      .cel-spray.tr {
+        top: 0;
+        right: 0;
+        transform: scaleX(-1);
+      }
+      .cel-spray.bl {
+        bottom: 0;
         left: 0;
+        transform: scaleY(-1);
+      }
+      .cel-spray.br {
+        bottom: 0;
         right: 0;
-        top: 7%;
-        z-index: 3;
-        text-align: center;
-        color: #fff;
-        text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
-        padding-inline: 1rem;
+        transform: scale(-1, -1);
       }
-      .poster-txt h4 {
-        font-family: var(--script);
-        font-size: clamp(1.5rem, 5.5vw, 2rem);
-        margin: 0;
-        font-weight: 400;
-      }
-      .poster-txt p {
-        margin: 0.35rem 0 0;
-        font-size: 0.66rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-      }
-      .poster-txt .big {
-        font-family: var(--serif);
-        font-size: 1.35rem;
-        letter-spacing: 0.02em;
-        text-transform: none;
-        display: inline-block;
-        margin: 0 0.3rem;
-        vertical-align: -0.1em;
-      }
-      .poster-txt hr {
-        border: 0;
-        height: 1px;
-        background: rgba(255, 255, 255, 0.6);
-        width: 56%;
-        margin: 0.6rem auto 0;
-      }
-      .poster-time {
-        margin: 0.9rem 0 0;
-        font-size: 0.66rem;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: var(--ink-faint);
-      }
-
       /* ============================================================
-   6 · DETAIL ZIGZAG (ornate frames)
+   5 · THE CELEBRATIONS (merged: posters + what-to-expect)
    ============================================================ */
-      .details {
+      .celebrations {
         background: var(--blush);
         position: relative;
         overflow: hidden;
       }
-      .details::before {
+      .celebrations::before {
         content: "";
         position: absolute;
         inset: 0;
@@ -1240,7 +1226,7 @@
         );
         mask-image: radial-gradient(60% 55% at 50% 38%, #000, transparent 72%);
       }
-      .details .wrap {
+      .celebrations .wrap {
         position: relative;
         z-index: 1;
       }
@@ -1305,13 +1291,13 @@
       }
       .row {
         display: grid;
-        grid-template-columns: minmax(0, 150px) 1fr;
+        grid-template-columns: minmax(0, 240px) 1fr;
         gap: clamp(1rem, 4vw, 2.5rem);
         align-items: center;
         padding: clamp(1rem, 3vh, 1.6rem) 0;
       }
       .row:nth-of-type(even) {
-        grid-template-columns: 1fr minmax(0, 150px);
+        grid-template-columns: 1fr minmax(0, 240px);
       }
       .row:nth-of-type(even) .row-art {
         order: 2;
@@ -1323,15 +1309,6 @@
       }
       .row-txt {
         max-width: 32rem;
-      }
-      .row-name {
-        margin: 0 0 0.5rem;
-        font-size: 0.62rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.28em;
-        color: var(--amber);
-        line-height: 1.7;
       }
       .row-desc {
         font-family: var(--serif);
@@ -1649,7 +1626,7 @@
           max-width: none;
         }
         .row-art {
-          max-width: 165px;
+          max-width: 260px;
           margin-inline: auto;
         }
         .travel dl {
@@ -1724,41 +1701,22 @@
     <!-- ============================================================
      1 · ENVELOPE
      ============================================================ -->
+    <!-- Full-bleed envelope. [hidden] in markup; JS shows it, so no-JS
+         lands straight on the page. Foliage and flap are drawn by JS. -->
     <div class="env" id="env" hidden>
       <button class="env-skip" id="env-skip" type="button">Skip</button>
-      <div class="env-stage">
-        <div class="env-flap">
-          <svg
-            viewBox="0 0 360 140"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path class="env-gold-dk" d="M0,140 L180,0 L360,140 Z" />
-          </svg>
-        </div>
-        <div class="env-card"><span id="env-mark">N &amp; Y</span></div>
-        <div class="env-body">
-          <svg
-            viewBox="0 0 360 264"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path class="env-gold" d="M0,0 L360,0 L360,264 L0,264 Z" />
-            <path
-              class="env-gold-dk"
-              d="M0,0 L180,96 L360,0 L360,10 L180,106 L0,10 Z"
-              opacity=".45"
-            />
-          </svg>
-        </div>
+      <div class="env-foliage" id="env-foliage" aria-hidden="true"></div>
+      <div class="env-inner">
+        <p class="env-mono" id="env-mark">N&amp;Y</p>
+        <p class="env-names" id="env-names">Nikhil &amp; Yashodhara</p>
+        <div class="env-div" aria-hidden="true"><i></i></div>
       </div>
       <p class="env-hint" id="env-hint">Tap to reveal</p>
-      <div class="env-flash" aria-hidden="true"></div>
+      <div class="env-flap" id="env-flap" aria-hidden="true"></div>
       <button class="env-tap" id="env-tap" type="button">
         <span class="visually-hidden">Tap to reveal the invitation</span>
       </button>
     </div>
-
     <a class="skip" href="#families">Skip to content</a>
 
     <!-- ============================================================
@@ -1886,36 +1844,21 @@
       </section>
 
       <!-- ============================================================
-     5 · EVENT POSTERS
+     5 · THE CELEBRATIONS
+     Was two sections: "Two days of celebration" (poster cards) and
+     "What to expect" (detail rows). Both looped the same CONFIG.events
+     and repeated name/art/time/venue; only `desc` was unique to the
+     second. Merged into one entry per ceremony.
      ============================================================ -->
-      <section id="events" class="posters">
-        <div class="wrap center">
-          <p class="label reveal">Two days of celebration</p>
-          <h2
-            class="script reveal"
-            style="--d: 0.06s; font-size: clamp(2rem, 7vw, 3.25rem)"
-          >
-            The Celebrations
-          </h2>
-          <div class="flourish reveal" style="--d: 0.1s" aria-hidden="true">
-            <i></i>
-          </div>
-          <div id="posters"><!-- built in JS --></div>
-        </div>
-      </section>
-
-      <!-- ============================================================
-     6 · DETAIL ZIGZAG
-     ============================================================ -->
-      <section id="schedule" class="details">
+      <section id="celebrations" class="celebrations">
         <div class="wrap">
           <div class="center">
-            <p class="label reveal">What to expect</p>
+            <p class="label reveal">Two days of celebration</p>
             <h2
               class="script reveal"
-              style="--d: 0.06s; font-size: clamp(1.9rem, 6.5vw, 2.75rem)"
+              style="--d: 0.06s; font-size: clamp(2rem, 7vw, 3.25rem)"
             >
-              Each Celebration
+              The Celebrations
             </h2>
             <div class="flourish reveal" style="--d: 0.1s" aria-hidden="true">
               <i></i>
@@ -2032,7 +1975,9 @@
       const CONFIG = {
         nameA: "Nikhil",
         nameB: "Yashodhara",
-        initials: ["N", "Y"],
+        // What the envelope card shows. A plain string rather than initials,
+        // so it can hold a date or a phrase without touching the markup.
+        envMark: "NY", // two tight initials, as on the reference
         dateISO: "2027-02-16T11:00:00", // ← set the muhurat time for a true countdown
         // All-day range for the .ics export. Inclusive on both ends; the exporter
         // adds the RFC-5545 exclusive DTEND itself.
@@ -2063,57 +2008,72 @@
         events: [
           {
             name: "Mehendi",
+            ground: ["#25642F", "#0D2A14"],
+            accent: "#EFD494",
             tag: "Where it begins",
             day: "Monday",
             dd: "15",
             mon: "February",
             yr: "2027",
             time: "Morning · time TBC",
-            art: null,
+            art: "photos/mehendi.jpg",
+            artPos: "50% 50%",
             desc: "Green, unhurried and full of chatter. Cool morning air, henna, and the first of everyone arriving.",
           },
           {
             name: "Haldi",
+            ground: ["#C07A12", "#6B3505"],
+            accent: "#FFF0C4",
             tag: "Turmeric and sunshine",
             day: "Monday",
             dd: "15",
             mon: "February",
             yr: "2027",
             time: "Afternoon · time TBC",
-            art: null,
+            art: "photos/haldi.jpg",
+            artPos: "50% 69%",
             desc: "Turmeric, sunshine and absolutely no dignity preserved. Wear something you do not love.",
           },
           {
             name: "Sangeet",
+            ground: ["#7B1E5B", "#330825"],
+            accent: "#F2D89B",
             tag: "The loud one",
             day: "Monday",
             dd: "15",
             mon: "February",
             yr: "2027",
             time: "Evening · time TBC",
-            art: null,
+            art: "photos/sangeet.jpg",
+            artPos: "50% 60%",
             desc: "Loud, bright and unapologetically celebratory. Bring your dancing shoes and no restraint.",
           },
           {
             name: "Ceremony",
+            ground: ["#9E2433", "#4A0C16"],
+            accent: "#EFD494",
             tag: "The vows",
             day: "Tuesday",
             dd: "16",
             mon: "February",
             yr: "2027",
             time: "Muhurat · time TBC",
-            art: null,
+            art: "photos/fera.jpg",
+            artPos: "50% 100%",
             desc: "Peaceful and serene. The rituals we have been waiting for, among the people we love most.",
           },
           {
             name: "Reception",
+            ground: ["#20406E", "#0C1728"],
+            accent: "#E8CE8F",
             tag: "One last night",
             day: "Tuesday",
             dd: "16",
             mon: "February",
             yr: "2027",
             time: "Evening · time TBC",
-            art: null,
+            art: "photos/reception.jpg",
+            artPos: "50% 58%",
             desc: "Lights, dinner and a long night of it. The last and largest gathering of the two days.",
           },
         ],
@@ -2219,6 +2179,170 @@
         el.replaceChildren(svg);
       }
 
+      /* ---------- envelope: hanging gold foliage ----------
+         Sprays droop from the top edge, denser at the corners. Sized to the
+         element's pixels like lightsSVG, so the buds stay circular. */
+      function envFoliage(el) {
+        const W = Math.max(240, el.clientWidth || 400),
+          H = Math.max(120, el.clientHeight || 260);
+        const ns = "http://www.w3.org/2000/svg";
+        const svg = document.createElementNS(ns, "svg");
+        svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+        const add = (t, a) => {
+          const n = document.createElementNS(ns, t);
+          for (const k in a) n.setAttribute(k, a[k]);
+          svg.appendChild(n);
+          return n;
+        };
+        const gold = ["#EFD494", "#D9BD77", "#C9A961", "#F5E4B4"];
+        // deterministic pseudo-random so it renders the same every time
+        let seed = 7;
+        const rnd = () => ((seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648);
+
+        const spray = (x0, dir) => {
+          const stems = 7;
+          for (let s = 0; s < stems; s++) {
+            const x1 = x0 + dir * (18 + rnd() * W * 0.3);
+            const len = H * (0.35 + rnd() * 0.6);
+            const cx = x0 + dir * (rnd() * W * 0.1);
+            add("path", {
+              d: `M${x0.toFixed(1)},0 Q${cx.toFixed(1)},${(len * 0.5).toFixed(1)} ${x1.toFixed(1)},${len.toFixed(1)}`,
+              stroke: "rgba(214,188,120,.5)",
+              "stroke-width": 0.8,
+              fill: "none",
+            });
+            const buds = 9 + Math.round(rnd() * 6);
+            for (let i = 0; i <= buds; i++) {
+              const t = i / buds;
+              // quadratic bezier point
+              const px = (1 - t) * (1 - t) * x0 + 2 * (1 - t) * t * cx + t * t * x1;
+              const py = 2 * (1 - t) * t * (len * 0.5) + t * t * len;
+              const r = (0.9 + rnd() * 2.1) * (1 - t * 0.45);
+              add("circle", {
+                cx: (px + (rnd() - 0.5) * 7).toFixed(1),
+                cy: py.toFixed(1),
+                r: r.toFixed(1),
+                fill: gold[(i + s) % 4],
+                opacity: (0.45 + rnd() * 0.5).toFixed(2),
+              });
+            }
+          }
+        };
+        spray(W * 0.06, 1);
+        spray(W * 0.2, 1);
+        spray(W * 0.94, -1);
+        spray(W * 0.8, -1);
+
+        // small crest on the centre line
+        const cx = W / 2,
+          cy = H * 0.12;
+        add("path", {
+          d: `M${cx},${cy - 13} C${cx + 7},${cy - 5} ${cx + 7},${cy + 4} ${cx},${cy + 12} C${cx - 7},${cy + 4} ${cx - 7},${cy - 5} ${cx},${cy - 13} Z`,
+          fill: "#E8CE8F",
+          opacity: ".85",
+        });
+        add("circle", { cx, cy: cy + 17, r: 2.4, fill: "#EFD494" });
+        add("path", {
+          d: `M${cx - 16},${cy + 24} Q${cx},${cy + 30} ${cx + 16},${cy + 24}`,
+          stroke: "rgba(214,188,120,.6)",
+          "stroke-width": 0.9,
+          fill: "none",
+        });
+        el.replaceChildren(svg);
+      }
+
+      /* ---------- envelope: scalloped V flap with a pearl clasp ----------
+         Beaded scallops are drawn as discrete circles along each diagonal
+         rather than as an arc path, so the lace reads correctly at any
+         viewport without the arc maths drifting. */
+      function envFlap(el) {
+        const W = Math.max(240, el.clientWidth || 400),
+          H = Math.max(120, el.clientHeight || 260);
+        const ns = "http://www.w3.org/2000/svg";
+        const svg = document.createElementNS(ns, "svg");
+        svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+        const add = (t, a) => {
+          const n = document.createElementNS(ns, t);
+          for (const k in a) n.setAttribute(k, a[k]);
+          svg.appendChild(n);
+          return n;
+        };
+        const apex = { x: W / 2, y: H };
+
+        // flap face, a shade lighter than the ground so the fold reads
+        add("path", {
+          d: `M0,0 L${W},0 L${apex.x},${apex.y} Z`,
+          fill: "rgba(255,255,255,.055)",
+        });
+        add("path", {
+          d: `M0,0 L${apex.x},${apex.y} L${W},0`,
+          stroke: "rgba(232,206,143,.85)",
+          "stroke-width": 1.4,
+          fill: "none",
+        });
+
+        // lace: beads stepped along each edge, with a finer dot between
+        const edge = (ax, ay) => {
+          const dx = apex.x - ax,
+            dy = apex.y - ay;
+          const L = Math.hypot(dx, dy);
+          const n = Math.max(8, Math.round(L / 15));
+          const nx = -dy / L,
+            ny = dx / L; // normal
+          const out = ax < apex.x ? -1 : 1; // push away from the flap
+          for (let i = 0; i <= n; i++) {
+            const t = i / n;
+            const px = ax + dx * t,
+              py = ay + dy * t;
+            add("circle", {
+              cx: (px + nx * out * 4.5).toFixed(1),
+              cy: (py + ny * out * 4.5).toFixed(1),
+              r: 4.2,
+              fill: "none",
+              stroke: "rgba(232,206,143,.75)",
+              "stroke-width": 1,
+            });
+            if (i < n)
+              add("circle", {
+                cx: (px + dx / n / 2 + nx * out * 9).toFixed(1),
+                cy: (py + dy / n / 2 + ny * out * 9).toFixed(1),
+                r: 1.1,
+                fill: "rgba(239,212,148,.8)",
+              });
+          }
+        };
+        edge(0, 0);
+        edge(W, 0);
+
+        // pearl clasp at the point
+        const g = document.createElementNS(ns, "radialGradient");
+        g.setAttribute("id", "pearl");
+        g.setAttribute("cx", ".35");
+        g.setAttribute("cy", ".3");
+        [
+          ["0", "#FFFDF5"],
+          [".55", "#F0E3C4"],
+          ["1", "#C9B489"],
+        ].forEach(([o, c]) => {
+          const st = document.createElementNS(ns, "stop");
+          st.setAttribute("offset", o);
+          st.setAttribute("stop-color", c);
+          g.appendChild(st);
+        });
+        const defs = document.createElementNS(ns, "defs");
+        defs.appendChild(g);
+        svg.appendChild(defs);
+        add("circle", {
+          cx: apex.x,
+          cy: apex.y,
+          r: 11,
+          fill: "url(#pearl)",
+          stroke: "rgba(150,120,60,.5)",
+          "stroke-width": 0.8,
+        });
+        el.replaceChildren(svg);
+      }
+
       /* ---------- marigold garland (footer) ---------- */
       function garland(el, swags) {
         const W = 1200,
@@ -2311,16 +2435,6 @@
           rowGap: 0.17,
           bulbs: 9,
         });
-        document.querySelectorAll("[data-lights]").forEach((el) =>
-          lightsSVG(el, {
-            span: 130,
-            sagRatio: 0.2,
-            rows: 2,
-            rowGap: 0.26,
-            bulbs: 6,
-            r: 2.4,
-          }),
-        );
         garland(
           $("garland-foot"),
           window.matchMedia("(min-width:760px)").matches ? 6 : 3,
@@ -2352,64 +2466,35 @@
           CONFIG.dateShort +
           " · " +
           CONFIG.city;
-        $("env-mark").textContent = CONFIG.initials.join(" & ");
+        $("env-mark").textContent = CONFIG.envMark;
 
         if (CONFIG.deityImage) {
           $("deity").src = CONFIG.deityImage;
           $("deity").alt = CONFIG.deityAlt || "";
         }
 
-        // event posters
-        $("posters").innerHTML = CONFIG.events
-          .map(
-            (ev, i) => `
-    <div class="poster reveal" style="--d:${((i % 2) * 0.08).toFixed(2)}s">
-      <div class="poster-head">
-        <p class="poster-date">${esc(ev.day)} ${esc(ev.dd)}${esc(ev.mon ? " " + ev.mon : "")} ${esc(ev.yr)}</p>
-        <h3 class="poster-name">${esc(ev.name)}</h3>
-        <p class="poster-tag">${esc(ev.tag)}</p>
-      </div>
-      <div class="poster-card">
-        ${
-          ev.art
-            ? `<img src="${esc(ev.art)}" alt="${esc(ev.name)}">`
-            : `<div class="poster-fallback"><div class="poster-lights" data-lights></div>
-               <p class="poster-ph">Illustration · 3:4.4</p></div>`
-        }
-        <div class="poster-txt">
-          <h4>${esc(ev.name)}</h4>
-          <p>${esc(ev.day)} <span class="big">${esc(ev.dd)}</span> ${esc(ev.mon)}</p>
-          <hr>
-          <p style="margin-top:.5rem">${esc(ev.time)}</p>
-        </div>
-      </div>
-      <p class="poster-time">${esc(CONFIG.venue)}</p>
-    </div>`,
-          )
-          .join("");
-        document.querySelectorAll("[data-lights]").forEach((el) =>
-          lightsSVG(el, {
-            span: 130,
-            sagRatio: 0.2,
-            rows: 2,
-            rowGap: 0.26,
-            bulbs: 6,
-            r: 2.4,
-          }),
-        );
-
-        // detail rows
+        // One entry per ceremony: date, name, tag, artwork, description,
+        // time and venue. Alternating left/right on desktop via .row:nth-of-type.
         $("rows").innerHTML = CONFIG.events
-          .map(
-            (ev) => `
+          .map((ev) => {
+            const g = ev.ground || ["#1D3459", "#16294A"];
+            const art = ev.art
+              ? `<img src="${esc(ev.art)}" alt="${esc(ev.name)}" style="--pos:${esc(ev.artPos || "50% 50%")}" loading="lazy" decoding="async">`
+              : `<div class="cel-ground" style="--g1:${esc(g[0])};--g2:${esc(g[1])};--accent:${esc(ev.accent || "#EFD494")}">
+                   <i class="cel-spray tl"></i><i class="cel-spray tr"></i>
+                   <i class="cel-spray bl"></i><i class="cel-spray br"></i>
+                 </div>`;
+            return `
     <div class="row reveal">
-      <figure class="gilt row-art">${photoHTML({ src: ev.art, alt: ev.name, label: ev.name + " · 3:4" }, "3/4")}</figure>
+      <figure class="gilt row-art"><div class="cel-art">${art}</div></figure>
       <div class="row-txt">
-        <p class="row-name">${esc(ev.name)}</p>
+        <p class="cel-date">${esc(ev.day)} ${esc(ev.dd)}${esc(ev.mon ? " " + ev.mon : "")} ${esc(ev.yr)}</p>
+        <h3 class="cel-name">${esc(ev.name)}</h3>
+        <p class="cel-tag">${esc(ev.tag)}</p>
         <p class="row-desc">${esc(ev.desc)}<span class="row-venue">${esc(ev.time)} · ${esc(CONFIG.venue)}</span></p>
       </div>
-    </div>`,
-          )
+    </div>`;
+          })
           .join("");
 
         $("travel").innerHTML = CONFIG.travel
@@ -2449,10 +2534,20 @@
 
         let done = 0;
         const total = CONFIG.scratch.length;
+        const btn = $("scratch-all");
+        // Both routes to a full reveal — scratching every heart by hand, or
+        // pressing the button — must leave the button in the same state. This
+        // used to live only in the click handler, so scratching them all left
+        // the button still offering "Reveal without scratching".
+        const allRevealed = () => {
+          btn.disabled = true;
+          btn.textContent = "Revealed";
+          showDate();
+        };
         const finishOne = (el) => {
           if (el.classList.contains("is-done")) return;
           el.classList.add("is-done");
-          if (++done === total) showDate();
+          if (++done === total) allRevealed();
         };
 
         CONFIG.scratch.forEach((s, i) => {
@@ -2543,14 +2638,12 @@
 
         // Scratching is pointer-only. This is the keyboard / assistive-tech path,
         // and the escape hatch for anyone who just wants the date.
-        $("scratch-all").addEventListener("click", () => {
+        btn.addEventListener("click", () => {
           CONFIG.scratch.forEach((_, i) => finishOne($("heart" + i)));
-          $("scratch-all").disabled = true;
-          $("scratch-all").textContent = "Revealed";
         });
 
         if (REDUCED) {
-          $("scratch-all").hidden = true;
+          btn.hidden = true;
         }
       }
 
@@ -2712,57 +2805,61 @@
         setTimeout(show, 200); // rAF is throttled to zero in background tabs
       }
 
-      /* ---------- hero doorway ----------
-   Called on every path out of the envelope. When the doors play, startPage()
-   is deliberately deferred: fired at teardown as before, the names would reach
-   full opacity behind shut panels and just be sitting there when they part.
-   At 1300ms they rise as the opening widens instead. */
-      function enterHero(playDoors) {
+      /* ---------- title card + door hand-off ----------
+         The old version only un-hid the doors at envelope teardown, but the
+         envelope had already faded out 700ms earlier — so the photo showed
+         bare, then the doors popped in on top of it and *then* moved. The
+         doors are now primed at boot, behind the title card, so they are in
+         the DOM and composited long before they are asked to move. */
+      const store = {
+        seen() {
+          try {
+            return sessionStorage.getItem("invOpened") === "1";
+          } catch (e) {
+            return false;
+          }
+        },
+        mark() {
+          try {
+            sessionStorage.setItem("invOpened", "1");
+          } catch (e) {}
+        },
+      };
+
+      let doorsArmed = false;
+      function primeDoors() {
         const d = $("doors"),
           p = $("portal");
-        if (!d) {
-          startPage();
-          return;
-        }
-        if (!playDoors || REDUCED) {
+        if (!d) return;
+        if (REDUCED || store.seen()) {
           d.remove();
           p.classList.add("is-open");
+          return;
+        }
+        d.hidden = false; // closed, composited, waiting
+        doorsArmed = true;
+      }
+
+      function openDoors() {
+        const d = $("doors"),
+          p = $("portal");
+        if (!doorsArmed || !d) {
           startPage();
           return;
         }
-        d.hidden = false;
-        void d.offsetHeight; // commit the initial state first
-        setTimeout(() => {
-          // a beat, then the swing
-          d.classList.add("is-open");
-          p.classList.add("is-open"); // the light pool comes up with it
-        }, 400);
-        setTimeout(startPage, 1300);
-        setTimeout(() => d.remove(), 2100); // drop the node once clear
+        d.classList.add("is-open");
+        p.classList.add("is-open");
+        setTimeout(startPage, 700); // names rise as the opening widens
+        setTimeout(() => d.remove(), 1500);
       }
 
-      /* ---------- envelope ---------- */
       function initEnv() {
         const env = $("env"),
           tap = $("env-tap"),
           skip = $("env-skip");
-        const store = {
-          seen() {
-            try {
-              return sessionStorage.getItem("invOpened") === "1";
-            } catch (e) {
-              return false;
-            }
-          },
-          mark() {
-            try {
-              sessionStorage.setItem("invOpened", "1");
-            } catch (e) {}
-          },
-        };
         if (REDUCED || store.seen()) {
           env.remove();
-          enterHero(false);
+          openDoors();
           return;
         }
 
@@ -2772,12 +2869,12 @@
         const teardown = () => {
           if (torn) return;
           torn = true;
-          timers.forEach(clearTimeout);
+          timers.forEach((t) => (typeof t === "function" ? t() : clearTimeout(t)));
           store.mark();
           document.removeEventListener("keydown", onKey, true);
           env.remove();
           document.body.classList.remove("is-locked");
-          enterHero(true);
+          openDoors();
           const n = $("hero-names");
           n.setAttribute("tabindex", "-1");
           n.focus({ preventScroll: true });
@@ -2788,9 +2885,9 @@
           tap.disabled = true;
           $("env-hint").classList.add("is-out");
           env.classList.add("is-opening");
-          timers.push(setTimeout(() => env.classList.add("is-flash"), 620));
-          timers.push(setTimeout(() => env.classList.add("is-gone"), 1250));
-          timers.push(setTimeout(teardown, 1950));
+          // flap swings first, then the whole sheet lifts off the hero
+          timers.push(setTimeout(() => env.classList.add("is-gone"), 900));
+          timers.push(setTimeout(teardown, 1600));
         };
         function onKey(e) {
           if (e.key === "Escape") {
@@ -2813,7 +2910,27 @@
                 : i + 1
           ].focus();
         }
+        // The flap's V spans the lower third; the hint sits just above it.
+        // Both drawings are pixel-sized, so they are redrawn on a width change.
+        const flap = $("env-flap");
+        const layout = () => {
+          const h = window.innerHeight;
+          flap.style.top = Math.round(h * 0.6) + "px";
+          flap.style.height = Math.round(h * 0.28) + "px";
+          $("env-hint").style.bottom = Math.round(h * 0.45) + "px";
+          envFoliage($("env-foliage"));
+          envFlap(flap);
+        };
         env.hidden = false;
+        layout();
+        let lastW = window.innerWidth;
+        const onResize = () => {
+          if (window.innerWidth === lastW) return; // ignore mobile URL-bar height changes
+          lastW = window.innerWidth;
+          layout();
+        };
+        window.addEventListener("resize", onResize);
+        timers.push(() => window.removeEventListener("resize", onResize));
         document.body.classList.add("is-locked");
         tap.addEventListener("click", open);
         skip.addEventListener("click", teardown);
@@ -2908,6 +3025,7 @@
       /* ------------------------------------------------------------ */
       hydrate();
       buildHero();
+      primeDoors();
       garland(
         $("garland-foot"),
         window.matchMedia("(min-width:760px)").matches ? 6 : 3,
