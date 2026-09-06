@@ -1,907 +1,2381 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nikhil &amp; Yashodhara · 16 February 2027 · Bodhgaya</title>
-<meta name="description" content="Nikhil and Yashodhara invite you to their wedding — 15 &amp; 16 February 2027, Marasa Sarovar Premiere, Bodhgaya.">
-<meta name="theme-color" content="#12213D">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Nikhil &amp; Yashodhara · 16 February 2027">
-<meta property="og:description" content="Marasa Sarovar Premiere, Bodhgaya, Bihar.">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nikhil &amp; Yashodhara · 16 February 2027 · Bodhgaya</title>
+    <meta
+      name="description"
+      content="Nikhil and Yashodhara invite you to their wedding — 15 &amp; 16 February 2027, Marasa Sarovar Premiere, Bodhgaya."
+    />
+    <meta name="theme-color" content="#12213D" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Nikhil &amp; Yashodhara · 16 February 2027"
+    />
+    <meta
+      property="og:description"
+      content="Marasa Sarovar Premiere, Bodhgaya, Bihar."
+    />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Great+Vibes&family=Jost:wght@300;400;500&family=Tiro+Devanagari+Sanskrit&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- the hero photo sits behind the envelope and the doors, so it would
+     otherwise be fetched at low priority and arrive after the reveal -->
+    <link
+      rel="preload"
+      as="image"
+      href="photos/intro.webp"
+      fetchpriority="high"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Great+Vibes&family=Jost:wght@300;400;500&family=Tiro+Devanagari+Sanskrit&display=swap"
+      rel="stylesheet"
+    />
 
-<style>
-/* ============================================================
+    <style>
+      /* ============================================================
    TOKENS
    Text-colour contrast against the cream ground (#FDF8F3):
-     ink   #3A2A22  12.4:1
-     rose  #A8323F   6.6:1
-     amber #A85B12   4.7:1
+     ink       #3A2A22        12.4:1
+     ink-soft  ink @ 72%       5.5:1
+     ink-faint ink @ 68%       4.9:1   (was 50% = 2.9:1, below AA)
+     rose      #A8323F         6.6:1
+     amber     #A85B12         4.7:1
    Bright golds/corals are decoration only, never body text.
    ============================================================ */
-:root{
-  --cream:#FDF8F3;
-  --blush:#FBEFE9;
-  --shell:#F3E7DA;
-  --rose:#A8323F;
-  --rose-lit:#C24A57;
-  --amber:#A85B12;
-  --gold:#C9A961;
-  --gold-lit:#E8CE8F;
-  --gold-deep:#8A6B22;
-  --ink:#3A2A22;
-  --ink-soft:rgba(58,42,34,.72);
-  --ink-faint:rgba(58,42,34,.5);
-  --night:#12213D;
+      :root {
+        --cream: #fdf8f3;
+        --blush: #fbefe9;
+        --shell: #f3e7da;
+        --rose: #a8323f;
+        --rose-lit: #c24a57;
+        --amber: #a85b12;
+        --gold: #c9a961;
+        --gold-lit: #e8ce8f;
+        --gold-deep: #8a6b22;
+        --ink: #3a2a22;
+        --ink-soft: rgba(58, 42, 34, 0.72);
+        --ink-faint: rgba(58, 42, 34, 0.68);
+        --night: #12213d;
 
-  --serif:'Cormorant Garamond','Iowan Old Style',Palatino,Georgia,serif;
-  --script:'Great Vibes','Snell Roundhand','Apple Chancery',cursive;
-  --sans:'Jost','Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif;
-  --deva:'Tiro Devanagari Sanskrit','Noto Serif Devanagari','Kohinoor Devanagari',serif;
+        --serif:
+          "Cormorant Garamond", "Iowan Old Style", Palatino, Georgia, serif;
+        --script: "Great Vibes", "Snell Roundhand", "Apple Chancery", cursive;
+        --sans:
+          "Jost", "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        --deva:
+          "Tiro Devanagari Sanskrit", "Noto Serif Devanagari",
+          "Kohinoor Devanagari", serif;
 
-  --ease:cubic-bezier(.22,.61,.36,1);
-  --sec:clamp(3.5rem,9vh,6.5rem);
-  --gutter:clamp(1.25rem,5vw,3rem);
-  --measure:min(100%,60rem);
+        --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+        /* Height of the hero's string-light box. lightsSVG draws down to roughly 55%
+     of it (3 rows at .17 gap, plus .17 of sag), and .hero clears that much
+     before the text starts — otherwise the bulbs sit behind the names. */
+        --lights-band: clamp(130px, 24vh, 240px);
+        --sec: clamp(3.5rem, 9vh, 6.5rem);
+        --gutter: clamp(1.25rem, 5vw, 3rem);
+        --measure: min(100%, 60rem);
 
-  --rosette:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g fill='%23EFD494' stroke='%238A6716' stroke-width='.7'><circle cx='12' cy='6.4' r='3.3'/><circle cx='12' cy='17.6' r='3.3'/><circle cx='6.4' cy='12' r='3.3'/><circle cx='17.6' cy='12' r='3.3'/></g><circle cx='12' cy='12' r='2.9' fill='%23C9A227' stroke='%238A6716' stroke-width='.7'/></svg>");
-}
+        --rosette: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g fill='%23EFD494' stroke='%238A6716' stroke-width='.7'><circle cx='12' cy='6.4' r='3.3'/><circle cx='12' cy='17.6' r='3.3'/><circle cx='6.4' cy='12' r='3.3'/><circle cx='17.6' cy='12' r='3.3'/></g><circle cx='12' cy='12' r='2.9' fill='%23C9A227' stroke='%238A6716' stroke-width='.7'/></svg>");
+      }
 
-*,*::before,*::after{box-sizing:border-box}
-[hidden]{display:none !important}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{
-  margin:0;background:var(--cream);color:var(--ink);
-  font-family:var(--sans);font-weight:300;
-  font-size:clamp(.95rem,.9rem + .2vw,1.05rem);line-height:1.8;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;
-}
-body.is-locked{overflow:hidden}
-img{max-width:100%;display:block}
-h1,h2,h3{margin:0;font-weight:400;line-height:1.15}
-p{margin:0 0 1.1em}
-p:last-child{margin-bottom:0}
-button{font:inherit}
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      html {
+        -webkit-text-size-adjust: 100%;
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-weight: 300;
+        font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
+        line-height: 1.8;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      body.is-locked {
+        overflow: hidden;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-weight: 400;
+        line-height: 1.15;
+      }
+      p {
+        margin: 0 0 1.1em;
+      }
+      p:last-child {
+        margin-bottom: 0;
+      }
+      button {
+        font: inherit;
+      }
 
-.script{font-family:var(--script);font-weight:400;color:var(--rose);line-height:1.3}
-.label{
-  font-family:var(--sans);font-size:.625rem;font-weight:500;
-  text-transform:uppercase;letter-spacing:.3em;color:var(--amber);
-}
-.narrative{font-family:var(--serif);font-style:italic;color:var(--ink-soft);line-height:1.95}
-.wrap{width:var(--measure);margin-inline:auto;padding-inline:var(--gutter)}
-section{padding-block:var(--sec);position:relative}
-section[id]{scroll-margin-top:1rem}
-.center{text-align:center}
+      .script {
+        font-family: var(--script);
+        font-weight: 400;
+        color: var(--rose);
+        line-height: 1.3;
+      }
+      .label {
+        font-family: var(--sans);
+        font-size: 0.68rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        color: var(--amber);
+      }
+      .narrative {
+        font-family: var(--serif);
+        font-style: italic;
+        color: var(--ink-soft);
+        line-height: 1.95;
+      }
+      .wrap {
+        width: var(--measure);
+        margin-inline: auto;
+        padding-inline: var(--gutter);
+      }
+      section {
+        padding-block: var(--sec);
+        position: relative;
+      }
+      section[id] {
+        scroll-margin-top: 1rem;
+      }
+      .center {
+        text-align: center;
+      }
 
-.flourish{display:flex;align-items:center;justify-content:center;gap:.7rem;margin:1.1rem auto 0}
-.flourish::before,.flourish::after{
-  content:'';height:1px;width:clamp(1.75rem,8vw,3.5rem);
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-}
-.flourish i{width:7px;height:7px;transform:rotate(45deg);background:var(--gold);display:block}
+      .flourish {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7rem;
+        margin: 1.1rem auto 0;
+      }
+      .flourish::before,
+      .flourish::after {
+        content: "";
+        height: 1px;
+        width: clamp(1.75rem, 8vw, 3.5rem);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold),
+          transparent
+        );
+      }
+      .flourish i {
+        width: 7px;
+        height: 7px;
+        transform: rotate(45deg);
+        background: var(--gold);
+        display: block;
+      }
 
-:focus-visible{outline:2px solid var(--rose);outline-offset:3px;border-radius:2px}
-.skip{
-  position:absolute;left:50%;top:0;transform:translate(-50%,-140%);
-  background:var(--cream);color:var(--ink);padding:.7rem 1.4rem;z-index:200;
-  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;
-  border:1px solid var(--rose);transition:transform .25s var(--ease);
-}
-.skip:focus{transform:translate(-50%,0)}
-.visually-hidden{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+      :focus-visible {
+        outline: 2px solid var(--rose);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+      .skip {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translate(-50%, -140%);
+        background: var(--cream);
+        color: var(--ink);
+        padding: 0.7rem 1.4rem;
+        z-index: 200;
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: 1px solid var(--rose);
+        transition: transform 0.25s var(--ease);
+      }
+      .skip:focus {
+        transform: translate(-50%, 0);
+      }
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
 
-.reveal{opacity:0;transform:translateY(22px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
-.reveal.is-visible{opacity:1;transform:none}
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 1s var(--ease),
+          transform 1s var(--ease);
+        transition-delay: var(--d, 0s);
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
 
-/* ============================================================
+      /* ============================================================
    1 · ENVELOPE INTRO — full screen, flap already open,
    glowing card in the mouth, "TAP TO REVEAL", white flash out.
    [hidden] in markup; JS shows it. No JS → straight to the page.
    ============================================================ */
-.env{
-  position:fixed;inset:0;z-index:150;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-  background:
-    radial-gradient(60% 40% at 50% 42%,rgba(232,206,143,.22),transparent 70%),
-    radial-gradient(120% 90% at 50% 50%,#241C0B 0%,#140F06 70%,#0B0803 100%);
-  transition:opacity .7s var(--ease);
-}
-.env.is-gone{opacity:0}
-/* gold bokeh specks */
-.env::before{
-  content:'';position:absolute;inset:0;pointer-events:none;opacity:.55;
-  background-image:
-    radial-gradient(2.5px 2.5px at 12% 22%,#E8CE8F,transparent),
-    radial-gradient(3px 3px at 82% 16%,#C9A961,transparent),
-    radial-gradient(2px 2px at 26% 74%,#E8CE8F,transparent),
-    radial-gradient(3.5px 3.5px at 68% 82%,#B8974E,transparent),
-    radial-gradient(2px 2px at 46% 12%,#E8CE8F,transparent),
-    radial-gradient(2.5px 2.5px at 92% 60%,#C9A961,transparent),
-    radial-gradient(2px 2px at 6% 52%,#E8CE8F,transparent),
-    radial-gradient(3px 3px at 56% 92%,#C9A961,transparent);
-  filter:blur(.4px);
-}
-.env-stage{
-  position:relative;width:min(88vw,430px);aspect-ratio:1/1.34;
-  filter:drop-shadow(0 30px 60px rgba(0,0,0,.55));
-}
-.env-stage > *{position:absolute}
-/* flap base must land exactly on the envelope mouth (26%): -12% + 38% = 26% */
-.env-flap{top:-12%;left:0;width:100%;height:38%;z-index:1}
-.env-body{inset:26% 0 0 0;z-index:3}
-.env-card{
-  left:8%;right:8%;top:6%;bottom:26%;z-index:2;border-radius:3px;
-  background:linear-gradient(180deg,#FFFDF7 0%,#FFF6E2 55%,#F6E3BE 100%);
-  box-shadow:0 0 44px 12px rgba(255,238,190,.7),0 0 120px 30px rgba(232,206,143,.35);
-  transition:transform 1s var(--ease),opacity .6s var(--ease);
-  /* only the top ~30% of the card clears the envelope body, so the
+      .env {
+        position: fixed;
+        inset: 0;
+        z-index: 150;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background:
+          radial-gradient(
+            60% 40% at 50% 42%,
+            rgba(232, 206, 143, 0.22),
+            transparent 70%
+          ),
+          radial-gradient(
+            120% 90% at 50% 50%,
+            #241c0b 0%,
+            #140f06 70%,
+            #0b0803 100%
+          );
+        transition: opacity 0.7s var(--ease);
+      }
+      .env.is-gone {
+        opacity: 0;
+      }
+      /* gold bokeh specks */
+      .env::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.55;
+        background-image:
+          radial-gradient(2.5px 2.5px at 12% 22%, #e8ce8f, transparent),
+          radial-gradient(3px 3px at 82% 16%, #c9a961, transparent),
+          radial-gradient(2px 2px at 26% 74%, #e8ce8f, transparent),
+          radial-gradient(3.5px 3.5px at 68% 82%, #b8974e, transparent),
+          radial-gradient(2px 2px at 46% 12%, #e8ce8f, transparent),
+          radial-gradient(2.5px 2.5px at 92% 60%, #c9a961, transparent),
+          radial-gradient(2px 2px at 6% 52%, #e8ce8f, transparent),
+          radial-gradient(3px 3px at 56% 92%, #c9a961, transparent);
+        filter: blur(0.4px);
+      }
+      .env-stage {
+        position: relative;
+        width: min(88vw, 430px);
+        aspect-ratio: 1/1.34;
+        filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.55));
+      }
+      .env-stage > * {
+        position: absolute;
+      }
+      /* flap base must land exactly on the envelope mouth (26%): -12% + 38% = 26% */
+      .env-flap {
+        top: -12%;
+        left: 0;
+        width: 100%;
+        height: 38%;
+        z-index: 1;
+      }
+      .env-body {
+        inset: 26% 0 0 0;
+        z-index: 3;
+      }
+      .env-card {
+        left: 8%;
+        right: 8%;
+        top: 6%;
+        bottom: 26%;
+        z-index: 2;
+        border-radius: 3px;
+        background: linear-gradient(
+          180deg,
+          #fffdf7 0%,
+          #fff6e2 55%,
+          #f6e3be 100%
+        );
+        box-shadow:
+          0 0 44px 12px rgba(255, 238, 190, 0.7),
+          0 0 120px 30px rgba(232, 206, 143, 0.35);
+        transition:
+          transform 1s var(--ease),
+          opacity 0.6s var(--ease);
+        /* only the top ~30% of the card clears the envelope body, so the
      monogram sits near the card's top edge, not its centre */
-  display:grid;place-items:start center;padding-top:5%;
-}
-.env-card span{font-family:var(--script);font-size:clamp(1.5rem,6vw,2.2rem);color:var(--rose);opacity:.85}
-.env svg{width:100%;height:100%;display:block;overflow:visible}
-.env-gold{fill:url(#goldGrad);stroke:#7E6428;stroke-width:1;vector-effect:non-scaling-stroke}
-.env-gold-dk{fill:url(#goldGradDk);stroke:#6B5426;stroke-width:1;vector-effect:non-scaling-stroke}
-.env-hint{
-  position:absolute;left:50%;bottom:clamp(2rem,8vh,4.5rem);transform:translateX(-50%);
-  margin:0;font-size:.66rem;font-weight:500;text-transform:uppercase;letter-spacing:.34em;
-  color:#F2E2B8;white-space:nowrap;transition:opacity .4s;
-}
-.env-hint.is-out{opacity:0}
-.env-tap{position:absolute;inset:0;background:transparent;border:0;cursor:pointer;z-index:10}
-.env-skip{
-  position:absolute;top:clamp(.9rem,3vh,1.6rem);right:clamp(.9rem,4vw,2rem);z-index:11;
-  background:transparent;border:0;cursor:pointer;color:rgba(242,226,184,.65);
-  font-size:.6rem;text-transform:uppercase;letter-spacing:.24em;padding:.5rem;
-}
-.env-skip:hover{color:#F2E2B8}
-.env.is-opening .env-card{transform:translateY(-16%) scale(1.55);opacity:.96}
-.env-flash{
-  position:absolute;inset:0;z-index:20;pointer-events:none;opacity:0;
-  background:radial-gradient(60% 45% at 50% 46%,#FFFFFF 0%,#FFF6E0 45%,rgba(255,246,224,0) 78%);
-  transition:opacity .55s ease-in;
-}
-.env.is-flash .env-flash{opacity:1}
+        display: grid;
+        place-items: start center;
+        padding-top: 5%;
+      }
+      .env-card span {
+        font-family: var(--script);
+        font-size: clamp(1.5rem, 6vw, 2.2rem);
+        color: var(--rose);
+        opacity: 0.85;
+      }
+      .env svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+        overflow: visible;
+      }
+      .env-gold {
+        fill: url(#goldGrad);
+        stroke: #7e6428;
+        stroke-width: 1;
+        vector-effect: non-scaling-stroke;
+      }
+      .env-gold-dk {
+        fill: url(#goldGradDk);
+        stroke: #6b5426;
+        stroke-width: 1;
+        vector-effect: non-scaling-stroke;
+      }
+      .env-hint {
+        position: absolute;
+        left: 50%;
+        bottom: clamp(2rem, 8vh, 4.5rem);
+        transform: translateX(-50%);
+        margin: 0;
+        font-size: 0.66rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.34em;
+        color: #f2e2b8;
+        white-space: nowrap;
+        transition: opacity 0.4s;
+      }
+      .env-hint.is-out {
+        opacity: 0;
+      }
+      .env-tap {
+        position: absolute;
+        inset: 0;
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        z-index: 10;
+      }
+      .env-skip {
+        position: absolute;
+        top: clamp(0.9rem, 3vh, 1.6rem);
+        right: clamp(0.9rem, 4vw, 2rem);
+        z-index: 11;
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        color: rgba(242, 226, 184, 0.65);
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.24em;
+        padding: 0.5rem;
+      }
+      .env-skip:hover {
+        color: #f2e2b8;
+      }
+      .env.is-opening .env-card {
+        transform: translateY(-16%) scale(1.55);
+        opacity: 0.96;
+      }
+      .env-flash {
+        position: absolute;
+        inset: 0;
+        z-index: 20;
+        pointer-events: none;
+        opacity: 0;
+        background: radial-gradient(
+          60% 45% at 50% 46%,
+          #ffffff 0%,
+          #fff6e0 45%,
+          rgba(255, 246, 224, 0) 78%
+        );
+        transition: opacity 0.55s ease-in;
+      }
+      .env.is-flash .env-flash {
+        opacity: 1;
+      }
 
-/* ============================================================
-   2 · HERO — full-bleed illustration slot over a CSS fallback
+      /* ============================================================
+   2 · HERO — dark warm ground with a lit doorway standing in it
    ============================================================ */
-.hero{
-  min-height:100svh;min-height:100vh;position:relative;overflow:hidden;
-  display:flex;flex-direction:column;align-items:center;justify-content:space-between;
-  padding:clamp(2.5rem,8vh,4.5rem) var(--gutter) clamp(2rem,6vh,3.5rem);
-  text-align:center;color:#fff;
-}
-.hero-art{position:absolute;inset:0;z-index:0}
-.hero-art img{width:100%;height:100%;object-fit:cover}
-/* painted-scene fallback, shown when CONFIG.heroImage is null */
-.hero-scene{position:absolute;inset:0;
-  background:
-    linear-gradient(180deg,#7FB6DC 0%,#A9D2E8 34%,#DDEAF0 56%,#F0E3CB 74%,#E7C892 100%);
-}
-.hero-scene .sun{
-  position:absolute;left:50%;top:16%;width:min(52vw,420px);aspect-ratio:1;
-  transform:translateX(-50%);border-radius:50%;
-  background:radial-gradient(circle,rgba(255,247,220,.85),rgba(255,236,182,0) 68%);
-}
-.hero-scene .mtn{position:absolute;left:0;right:0;bottom:36%;width:100%;height:30%}
-.hero-scene .haze{
-  position:absolute;left:0;right:0;bottom:34%;height:12%;
-  background:linear-gradient(180deg,rgba(253,240,214,0),rgba(253,240,214,.9));
-}
-.hero-scene .floor{
-  position:absolute;left:0;right:0;bottom:0;height:38%;
-  background:linear-gradient(180deg,#EBD3A4 0%,#DDB878 42%,#C99A55 100%);
-}
-.hero-scene .aisle{
-  position:absolute;left:50%;bottom:0;transform:translateX(-50%);
-  width:34%;height:38%;
-  background:linear-gradient(180deg,rgba(255,244,214,.95),rgba(255,229,168,.5));
-  clip-path:polygon(40% 0,60% 0,100% 100%,0 100%);
-}
-.hero-scene .mandap{
-  position:absolute;left:50%;bottom:33%;transform:translateX(-50%);
-  width:min(34vw,170px);filter:drop-shadow(0 6px 14px rgba(120,80,30,.3));
-}
-.hero-scene .mandap svg{width:100%;height:auto;display:block}
-.hero-scene .glow{
-  position:absolute;left:50%;bottom:4%;transform:translateX(-50%);
-  width:min(80vw,620px);height:30%;border-radius:50%;
-  background:radial-gradient(ellipse,rgba(255,214,130,.5),transparent 70%);
-}
-.hero-lights{position:absolute;left:0;right:0;top:0;height:46%;z-index:1;pointer-events:none}
-.hero-lights svg{width:100%;height:100%;display:block;overflow:visible}
-.hero-scrim{
-  position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:linear-gradient(180deg,rgba(20,28,48,.42) 0%,rgba(20,28,48,.06) 28%,
-             rgba(20,28,48,0) 55%,rgba(20,28,48,.30) 88%,rgba(20,28,48,.5) 100%);
-}
-.hero > .hero-top,.hero > .hero-bot{position:relative;z-index:3;width:100%}
-.hero-kicker{
-  margin:0;font-size:.62rem;font-weight:500;text-transform:uppercase;letter-spacing:.36em;
-  color:rgba(255,255,255,.92);text-shadow:0 2px 12px rgba(20,28,48,.6);
-}
-.hero-names{
-  font-family:var(--script);color:#fff;margin:.25rem 0 0;
-  font-size:clamp(2.6rem,11vw,5.5rem);line-height:1.1;
-  text-shadow:0 3px 26px rgba(20,28,48,.55);
-}
-.hero-names:focus{outline:none}
-.hero-names .amp{font-size:.62em;display:inline-block;margin:0 .12em;color:#FFEFC4}
-.hero-scroll{
-  margin:0;font-size:.6rem;font-weight:500;text-transform:uppercase;letter-spacing:.3em;
-  color:rgba(255,255,255,.9);text-shadow:0 2px 10px rgba(20,28,48,.6);
-}
-.hero-scroll i{display:block;margin:.5rem auto 0;width:11px;height:11px;
-  border-right:1.5px solid rgba(255,255,255,.9);border-bottom:1.5px solid rgba(255,255,255,.9);
-  transform:rotate(45deg);animation:nudge 2.4s ease-in-out infinite}
-@keyframes nudge{0%,100%{transform:rotate(45deg) translate(0,0);opacity:.85}50%{transform:rotate(45deg) translate(3px,3px);opacity:1}}
+      .hero {
+        /* 100vh first as the fallback, then 100svh — the LAST supported
+     declaration wins, and svh is the one that excludes mobile browser chrome */
+        min-height: 100vh;
+        min-height: 100svh;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        /* top padding clears the string lights so the names are never behind bulbs */
+        padding: calc(var(--lights-band) * 0.55 + clamp(0.75rem, 2vh, 1.5rem))
+          var(--gutter) clamp(1.75rem, 5vh, 3rem);
+        text-align: center;
+        color: #fff;
+      }
+      /* The ground is deliberately quiet and dark: the doorway is the only lit
+   object on the screen, and it carries straight on from the envelope's
+   gold-on-dark palette. */
+      .hero-art {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background:
+          radial-gradient(
+            70% 45% at 50% 68%,
+            rgba(232, 206, 143, 0.16),
+            transparent 72%
+          ),
+          radial-gradient(
+            130% 95% at 50% 40%,
+            #241c0b 0%,
+            #171106 62%,
+            #0b0803 100%
+          );
+      }
+      /* gold bokeh, same specks as the envelope ground */
+      .hero-art::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.5;
+        background-image:
+          radial-gradient(2.5px 2.5px at 12% 22%, #e8ce8f, transparent),
+          radial-gradient(3px 3px at 82% 16%, #c9a961, transparent),
+          radial-gradient(2px 2px at 26% 74%, #e8ce8f, transparent),
+          radial-gradient(3.5px 3.5px at 68% 82%, #b8974e, transparent),
+          radial-gradient(2px 2px at 46% 12%, #e8ce8f, transparent),
+          radial-gradient(2.5px 2.5px at 92% 60%, #c9a961, transparent),
+          radial-gradient(2px 2px at 6% 52%, #e8ce8f, transparent),
+          radial-gradient(3px 3px at 56% 92%, #c9a961, transparent);
+        filter: blur(0.4px);
+      }
+      .hero-lights {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: var(--lights-band);
+        z-index: 1;
+        pointer-events: none;
+      }
+      .hero-lights svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+        overflow: visible;
+      }
+      /* light vignette only — the ground is already dark by design */
+      .hero-scrim {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        background: radial-gradient(
+          115% 85% at 50% 50%,
+          transparent 55%,
+          rgba(8, 6, 3, 0.5) 100%
+        );
+      }
+      .hero > .hero-top,
+      .hero > .hero-bot {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+      }
 
-/* ============================================================
+      /* ------------------------------------------------------------
+   2b · THE DOORWAY
+   A contained object standing in the hero, not a frame around
+   the viewport. Arched opening (same border-radius idiom as
+   .deity), gold surround, the photograph inside, and two panels
+   that swing clear and are then removed.
+   ------------------------------------------------------------ */
+      .portal {
+        position: relative;
+        z-index: 3;
+        flex: 0 0 auto;
+        width: min(72vw, 330px);
+        aspect-ratio: 3/4.2;
+        /* aspect-ratio yields to max-height, which is what keeps the doorway from
+     pushing "Scroll to explore" off a short screen (measured against 320x568).
+     flex:0 0 auto stops the flex container shrinking it into a squat shape
+     instead — the hero has min-height, so growing a few px is harmless. */
+        max-height: min(52svh, 460px);
+        margin-block: clamp(1rem, 3vh, 2rem);
+      }
+      .portal-frame {
+        position: absolute;
+        inset: 0;
+        padding: clamp(7px, 2.2vw, 12px);
+        border-radius: 50% 50% 6px 6px / 22% 22% 6px 6px;
+        background: linear-gradient(
+          135deg,
+          #f7e3ac 0%,
+          #c9a227 14%,
+          #8a6716 28%,
+          #f2d89b 44%,
+          #c9a227 60%,
+          #7e5d14 76%,
+          #efd494 90%,
+          #b8901e 100%
+        );
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.35),
+          inset 0 0 0 2px rgba(120, 88, 18, 0.35),
+          0 18px 44px rgba(0, 0, 0, 0.55),
+          0 0 60px rgba(232, 206, 143, 0.22);
+      }
+      /* brass studs on the surround — px background-size keeps them circular */
+      .portal-frame::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: var(--rosette), var(--rosette);
+        background-repeat: no-repeat;
+        background-size: clamp(11px, 2.8vw, 17px);
+        background-position:
+          left 78%,
+          right 78%;
+      }
+      .portal-open {
+        position: absolute;
+        inset: clamp(7px, 2.2vw, 12px);
+        overflow: hidden;
+        border-radius: 50% 50% 3px 3px / 21% 21% 3px 3px;
+        background: #241a12;
+      }
+      .portal-open img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: var(--pos, 50% 38%);
+      }
+      .portal-ph {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 1rem;
+        font-size: 0.58rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(255, 241, 230, 0.5);
+        background: linear-gradient(180deg, #2c1f16, #1a120c);
+      }
+      /* warm pool of light spilling out of the doorway, brighter once it is open */
+      .portal-glow {
+        position: absolute;
+        left: 50%;
+        bottom: -9%;
+        width: 170%;
+        height: 26%;
+        transform: translateX(-50%);
+        border-radius: 50%;
+        pointer-events: none;
+        background: radial-gradient(
+          ellipse,
+          rgba(255, 214, 130, 0.5),
+          transparent 70%
+        );
+        opacity: 0.5;
+        transition: opacity 1.2s var(--ease);
+      }
+      .portal.is-open .portal-glow {
+        opacity: 1;
+      }
+
+      .doors {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        overflow: hidden;
+        pointer-events: none;
+        /* match the opening's arch, so a 3D-transformed panel cannot escape the clip */
+        border-radius: 50% 50% 3px 3px / 21% 21% 3px 3px;
+      }
+      /* overflow and perspective deliberately live on different elements — sharing a
+   box can force the 3D context flat */
+      .door-scene {
+        position: absolute;
+        inset: 0;
+        perspective: 900px;
+        perspective-origin: 50% 45%;
+      }
+      .door-panel {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        /* +1px so sub-pixel rounding never leaks a bright sliver down the seam */
+        width: calc(50% + 1px);
+        overflow: hidden;
+        background:
+          linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.45),
+            transparent 14%,
+            transparent 86%,
+            rgba(0, 0, 0, 0.3)
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.022) 0 2px,
+            transparent 2px 7px
+          ),
+          linear-gradient(180deg, #4a1c22 0%, #3a151b 50%, #2c0f14 100%);
+        transition:
+          transform 1.5s var(--ease),
+          filter 1.5s var(--ease);
+      }
+      .door-l {
+        left: 0;
+        transform-origin: left center;
+      }
+      .door-r {
+        right: 0;
+        transform-origin: right center;
+      }
+      /* 105° carries the panel past edge-on so it is definitively gone; the
+   brightness drop kills the mirrored back face */
+      .doors.is-open .door-l {
+        transform: rotateY(-105deg);
+        filter: brightness(0.2);
+      }
+      .doors.is-open .door-r {
+        transform: rotateY(105deg);
+        filter: brightness(0.2);
+      }
+      /* Ornament scales are tuned to a ~150px-wide panel (half of a 330px doorway),
+   not to a full-viewport one. */
+      .door-panel::before {
+        content: "";
+        position: absolute;
+        inset: clamp(6px, 2vw, 10px);
+        border: 1.5px solid rgba(201, 169, 97, 0.5);
+        box-shadow:
+          inset 0 0 0 1px rgba(232, 206, 143, 0.18),
+          0 0 0 1px rgba(0, 0, 0, 0.45);
+      }
+      .door-panel::after {
+        content: "";
+        position: absolute;
+        inset: clamp(13px, 4vw, 22px);
+        background-image:
+          var(--rosette), var(--rosette), var(--rosette), var(--rosette);
+        background-repeat: no-repeat;
+        background-size: clamp(9px, 2.2vw, 14px);
+        background-position:
+          left top,
+          right top,
+          left bottom,
+          right bottom;
+      }
+      /* One full medallion per panel, centred ON the seam. Each panel's own
+   overflow:hidden clips it to a half, so the halves travel with the doors. */
+      .door-medallion {
+        position: absolute;
+        top: 44%;
+        width: clamp(64px, 19vw, 110px);
+        aspect-ratio: 1;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background:
+          radial-gradient(circle, #f2d89b 0 16%, transparent 17%),
+          radial-gradient(
+            circle,
+            transparent 0 30%,
+            #c9a961 31% 35%,
+            transparent 36%
+          ),
+          radial-gradient(
+            circle,
+            transparent 0 44%,
+            #8a6716 45% 48%,
+            transparent 49%
+          ),
+          radial-gradient(circle, rgba(232, 206, 143, 0.14), transparent 62%);
+      }
+      /* The panels overlap by 1px each, so anchoring the medallion to a panel EDGE
+   would put the two halves 2px apart. Pull each back to the true centre. */
+      .door-l .door-medallion {
+        left: calc(100% - 1px);
+      }
+      .door-r .door-medallion {
+        left: 1px;
+      }
+      .door-handle {
+        position: absolute;
+        top: 52%;
+        width: clamp(11px, 3vw, 16px);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: clamp(2px, 0.6vw, 3px) solid;
+        border-color: #e6c883 #a8842f #7e6428 #c9a961;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+        transform: translateY(-50%);
+      }
+      .door-l .door-handle {
+        right: 11%;
+      }
+      .door-r .door-handle {
+        left: 11%;
+      }
+      /* warm light through the parting seam — an animation, not a transition, so it
+   blooms and fades within the swing instead of sitting lit until the node goes */
+      .door-seam {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        transform: translateX(-50%);
+        background: rgba(255, 236, 190, 0.9);
+        box-shadow: 0 0 26px 12px rgba(255, 224, 160, 0.6);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .doors.is-open .door-seam {
+        animation: seam 1.5s var(--ease) forwards;
+      }
+      @keyframes seam {
+        0% {
+          opacity: 0;
+        }
+        30% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      .hero-kicker {
+        margin: 0;
+        font-size: 0.62rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.36em;
+        color: rgba(255, 255, 255, 0.92);
+        text-shadow: 0 2px 12px rgba(20, 28, 48, 0.6);
+      }
+      .hero-names {
+        font-family: var(--script);
+        color: #fff;
+        margin: 0.25rem 0 0;
+        font-size: clamp(2.6rem, 11vw, 5.5rem);
+        line-height: 1.1;
+        text-shadow: 0 3px 26px rgba(20, 28, 48, 0.55);
+      }
+      .hero-names:focus {
+        outline: none;
+      }
+      .hero-names .amp {
+        font-size: 0.62em;
+        display: inline-block;
+        margin: 0 0.12em;
+        color: #ffefc4;
+      }
+      .hero-scroll {
+        margin: 0;
+        font-size: 0.6rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: rgba(255, 255, 255, 0.9);
+        text-shadow: 0 2px 10px rgba(20, 28, 48, 0.6);
+      }
+      .hero-scroll i {
+        display: block;
+        margin: 0.5rem auto 0;
+        width: 11px;
+        height: 11px;
+        border-right: 1.5px solid rgba(255, 255, 255, 0.9);
+        border-bottom: 1.5px solid rgba(255, 255, 255, 0.9);
+        transform: rotate(45deg);
+        animation: nudge 2.4s ease-in-out infinite;
+      }
+      @keyframes nudge {
+        0%,
+        100% {
+          transform: rotate(45deg) translate(0, 0);
+          opacity: 0.85;
+        }
+        50% {
+          transform: rotate(45deg) translate(3px, 3px);
+          opacity: 1;
+        }
+      }
+
+      /* ============================================================
    3 · BLESSING + FAMILIES
    ============================================================ */
-.families{background:var(--cream)}
-.deity-frame{
-  display:inline-block;padding:6px;margin:0 auto;
-  border-radius:50% 50% 4px 4px / 30% 30% 3px 3px;
-  background:linear-gradient(135deg,#F7E3AC,#C9A961 30%,#8A6716 55%,#EFD494 80%,#B8974E);
-  box-shadow:0 6px 18px rgba(58,42,34,.18);
-}
-.deity{width:clamp(56px,13vw,72px);height:auto;aspect-ratio:3/4;object-fit:cover;display:block;
-  border-radius:50% 50% 2px 2px / 30% 30% 2px 2px}
-.deva{font-family:var(--deva);font-size:clamp(1rem,3vw,1.25rem);color:var(--rose);display:block;margin-top:.7rem}
-.translit{display:block;margin-top:.2rem;font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-faint)}
-.fam{margin-top:clamp(2.5rem,7vh,4rem)}
-.fam-name{font-family:var(--script);color:var(--rose);font-size:clamp(2.25rem,8vw,3.5rem);margin:0}
-.fam-parents{
-  margin:.5rem 0 0;font-size:.62rem;font-weight:400;text-transform:uppercase;
-  letter-spacing:.16em;color:var(--ink-soft);line-height:2;
-}
-.fam-with{font-family:var(--script);color:var(--gold-deep);font-size:clamp(1.5rem,5vw,2rem);margin:clamp(1.5rem,4vh,2.25rem) 0}
+      .families {
+        background: var(--cream);
+      }
+      .deity-frame {
+        display: inline-block;
+        padding: 6px;
+        margin: 0 auto;
+        border-radius: 50% 50% 4px 4px / 30% 30% 3px 3px;
+        background: linear-gradient(
+          135deg,
+          #f7e3ac,
+          #c9a961 30%,
+          #8a6716 55%,
+          #efd494 80%,
+          #b8974e
+        );
+        box-shadow: 0 6px 18px rgba(58, 42, 34, 0.18);
+      }
+      .deity {
+        width: clamp(56px, 13vw, 72px);
+        height: auto;
+        aspect-ratio: 3/4;
+        object-fit: cover;
+        display: block;
+        border-radius: 50% 50% 2px 2px / 30% 30% 2px 2px;
+      }
+      .deva {
+        font-family: var(--deva);
+        font-size: clamp(1rem, 3vw, 1.25rem);
+        color: var(--rose);
+        display: block;
+        margin-top: 0.7rem;
+      }
+      .translit {
+        display: block;
+        margin-top: 0.2rem;
+        font-size: 0.62rem;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+      }
+      .fam {
+        margin-top: clamp(2.5rem, 7vh, 4rem);
+      }
+      .fam-name {
+        font-family: var(--script);
+        color: var(--rose);
+        font-size: clamp(2.25rem, 8vw, 3.5rem);
+        margin: 0;
+      }
+      .fam-parents {
+        margin: 0.5rem 0 0;
+        font-size: 0.62rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--ink-soft);
+        line-height: 2;
+      }
+      .fam-with {
+        font-family: var(--script);
+        color: var(--gold-deep);
+        font-size: clamp(1.5rem, 5vw, 2rem);
+        margin: clamp(1.5rem, 4vh, 2.25rem) 0;
+      }
 
-/* ============================================================
+      /* ============================================================
    4 · REVEAL THE DATE — scratch hearts, countdown, confetti
    ============================================================ */
-.date-sec{
-  background:radial-gradient(120% 90% at 50% 0%,#C8394B 0%,#AE2C3D 55%,#8E1F2F 100%);
-  color:#FFF1E6;overflow:hidden;
-}
-.date-sec .label{color:#FFD9A8}
-.date-sec h2{color:#FFF1E6}
-.date-sec .flourish::before,.date-sec .flourish::after{background:linear-gradient(90deg,transparent,#FFD9A8,transparent)}
-.date-sec .flourish i{background:#FFD9A8}
-.hearts{display:flex;justify-content:center;gap:clamp(.75rem,3vw,1.75rem);margin-top:clamp(2rem,5vh,3rem);flex-wrap:wrap}
-.heart{
-  position:relative;width:clamp(84px,24vw,124px);aspect-ratio:1/.92;
-  -webkit-clip-path:url(#heartClip);clip-path:url(#heartClip);
-  background:linear-gradient(160deg,#FFF6E2,#FFE9BC 45%,#F3D18C);
-  display:grid;place-items:center;
-}
-.heart-val{text-align:center;line-height:1.25;padding-bottom:8%}
-.heart-val b{display:block;font-family:var(--serif);font-size:clamp(1.1rem,4vw,1.5rem);font-weight:500;color:var(--rose)}
-.heart-val i{display:block;font-style:normal;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
-.heart canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:none;transition:opacity .5s var(--ease)}
-.heart.is-done canvas{opacity:0;pointer-events:none}
-.scratch-all{
-  margin-top:1.5rem;background:transparent;border:1px solid rgba(255,241,230,.45);
-  color:#FFF1E6;border-radius:999px;padding:.7rem 1.6rem;cursor:pointer;
-  font-size:.6rem;font-weight:500;text-transform:uppercase;letter-spacing:.22em;
-}
-.scratch-all:hover{border-color:#FFF1E6}
-.date-out{margin-top:clamp(2rem,5vh,3rem);opacity:0;transform:translateY(14px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
-.date-out.is-shown{opacity:1;transform:none}
-.date-big{font-family:var(--script);font-size:clamp(2rem,7vw,3.25rem);color:#FFD9A8;margin:0}
-.date-sub{font-family:var(--script);font-size:clamp(1.25rem,4vw,1.75rem);color:#FFF1E6;margin:.1rem 0 0}
-.cd{display:flex;justify-content:center;gap:clamp(.5rem,2vw,1rem);margin-top:clamp(1.5rem,4vh,2.25rem);flex-wrap:wrap}
-.cd div{
-  min-width:clamp(64px,18vw,86px);padding:.7rem .5rem;border-radius:12px;
-  background:rgba(255,241,230,.13);border:1px solid rgba(255,241,230,.22);
-}
-.cd b{display:block;font-family:var(--serif);font-size:clamp(1.25rem,5vw,1.7rem);font-weight:500;color:#FFF1E6;line-height:1.2}
-.cd span{display:block;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,241,230,.7);margin-top:.15rem}
-.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1}
-.confetti i{position:absolute;top:-6%;width:7px;height:11px;border-radius:1px;opacity:.9;animation:fall linear infinite}
-@keyframes fall{
-  0%{transform:translateY(-10%) rotate(0deg)}
-  100%{transform:translateY(760px) rotate(540deg)}
-}
-.date-sec .wrap{position:relative;z-index:2}
+      .date-sec {
+        background: radial-gradient(
+          120% 90% at 50% 0%,
+          #c8394b 0%,
+          #ae2c3d 55%,
+          #8e1f2f 100%
+        );
+        color: #fff1e6;
+        overflow: hidden;
+      }
+      .date-sec .label {
+        color: #ffd9a8;
+      }
+      .date-sec h2 {
+        color: #fff1e6;
+      }
+      .date-sec .flourish::before,
+      .date-sec .flourish::after {
+        background: linear-gradient(90deg, transparent, #ffd9a8, transparent);
+      }
+      .date-sec .flourish i {
+        background: #ffd9a8;
+      }
+      .hearts {
+        display: flex;
+        justify-content: center;
+        gap: clamp(0.75rem, 3vw, 1.75rem);
+        margin-top: clamp(2rem, 5vh, 3rem);
+        flex-wrap: wrap;
+      }
+      .heart {
+        position: relative;
+        width: clamp(84px, 24vw, 124px);
+        aspect-ratio: 1/0.92;
+        -webkit-clip-path: url(#heartClip);
+        clip-path: url(#heartClip);
+        background: linear-gradient(160deg, #fff6e2, #ffe9bc 45%, #f3d18c);
+        display: grid;
+        place-items: center;
+      }
+      .heart-val {
+        text-align: center;
+        line-height: 1.25;
+        padding-bottom: 8%;
+      }
+      .heart-val b {
+        display: block;
+        font-family: var(--serif);
+        font-size: clamp(1.1rem, 4vw, 1.5rem);
+        font-weight: 500;
+        color: var(--rose);
+      }
+      .heart-val i {
+        display: block;
+        font-style: normal;
+        font-size: 0.58rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--amber);
+      }
+      .heart canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        cursor: grab;
+        touch-action: none;
+        transition: opacity 0.5s var(--ease);
+      }
+      .heart.is-done canvas {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .scratch-all {
+        margin-top: 1.5rem;
+        background: transparent;
+        border: 1px solid rgba(255, 241, 230, 0.45);
+        color: #fff1e6;
+        border-radius: 999px;
+        padding: 0.7rem 1.6rem;
+        cursor: pointer;
+        font-size: 0.6rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+      }
+      .scratch-all:hover {
+        border-color: #fff1e6;
+      }
+      .date-out {
+        margin-top: clamp(2rem, 5vh, 3rem);
+        opacity: 0;
+        transform: translateY(14px);
+        transition:
+          opacity 0.8s var(--ease),
+          transform 0.8s var(--ease);
+      }
+      .date-out.is-shown {
+        opacity: 1;
+        transform: none;
+      }
+      .date-big {
+        font-family: var(--script);
+        font-size: clamp(2rem, 7vw, 3.25rem);
+        color: #ffd9a8;
+        margin: 0;
+      }
+      .date-sub {
+        font-family: var(--script);
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+        color: #fff1e6;
+        margin: 0.1rem 0 0;
+      }
+      .cd {
+        display: flex;
+        justify-content: center;
+        gap: clamp(0.5rem, 2vw, 1rem);
+        margin-top: clamp(1.5rem, 4vh, 2.25rem);
+        flex-wrap: wrap;
+      }
+      .cd div {
+        min-width: clamp(64px, 18vw, 86px);
+        padding: 0.7rem 0.5rem;
+        border-radius: 12px;
+        background: rgba(255, 241, 230, 0.13);
+        border: 1px solid rgba(255, 241, 230, 0.22);
+      }
+      .cd b {
+        display: block;
+        font-family: var(--serif);
+        font-size: clamp(1.25rem, 5vw, 1.7rem);
+        font-weight: 500;
+        color: #fff1e6;
+        line-height: 1.2;
+      }
+      /* .12em tracking (not .2em) so "Minutes" still fits the 64px min-width box */
+      .cd span {
+        display: block;
+        font-size: 0.56rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 241, 230, 0.78);
+        margin-top: 0.15rem;
+        white-space: nowrap;
+      }
+      .confetti {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 1;
+      }
+      .confetti i {
+        position: absolute;
+        top: -6%;
+        width: 7px;
+        height: 11px;
+        border-radius: 1px;
+        opacity: 0.9;
+        animation: fall linear infinite;
+      }
+      /* --r is the per-piece starting angle, set inline. It has to live inside the
+   keyframes: the animation owns `transform`, so an inline transform is ignored.
+   130vh clears the section on any viewport; the parent clips the overshoot. */
+      @keyframes fall {
+        0% {
+          transform: translateY(-10%) rotate(var(--r, 0deg));
+        }
+        100% {
+          transform: translateY(130vh) rotate(calc(var(--r, 0deg) + 540deg));
+        }
+      }
+      .date-sec .wrap {
+        position: relative;
+        z-index: 2;
+      }
 
-/* ============================================================
+      /* ============================================================
    5 · EVENT POSTER CARDS
    ============================================================ */
-.posters{background:var(--cream)}
-.poster{margin-top:clamp(2.5rem,7vh,4rem)}
-.poster-head{margin-bottom:1.1rem}
-.poster-date{margin:0;font-size:.6rem;font-weight:500;text-transform:uppercase;letter-spacing:.28em;color:var(--rose-lit)}
-.poster-name{font-family:var(--script);color:var(--rose);font-size:clamp(1.75rem,6vw,2.5rem);margin:.1rem 0 0}
-.poster-tag{font-family:var(--script);color:var(--gold-deep);font-size:clamp(1rem,3.2vw,1.25rem);margin:0}
-.poster-card{
-  position:relative;width:min(100%,340px);margin-inline:auto;aspect-ratio:3/4.4;
-  border-radius:14px;overflow:hidden;background:var(--night);
-  border:5px solid #fff;
-  box-shadow:0 18px 44px rgba(58,42,34,.26);
-}
-.poster-card img{width:100%;height:100%;object-fit:cover}
-/* fallback scene inside a poster when no artwork is set */
-.poster-fallback{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(80% 50% at 50% 88%,rgba(242,169,59,.5),transparent 70%),
-    linear-gradient(180deg,#16294A 0%,#1D3459 52%,#241A3C 100%);
-}
-.poster-lights{position:absolute;left:0;right:0;top:0;height:32%}
-.poster-lights svg{width:100%;height:100%;display:block;overflow:visible}
-.poster-ph{
-  position:absolute;left:0;right:0;bottom:14%;text-align:center;
-  font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,241,230,.5);
-}
-.poster-txt{
-  position:absolute;left:0;right:0;top:7%;z-index:3;text-align:center;color:#fff;
-  text-shadow:0 2px 16px rgba(0,0,0,.6);padding-inline:1rem;
-}
-.poster-txt h4{font-family:var(--script);font-size:clamp(1.5rem,5.5vw,2rem);margin:0;font-weight:400}
-.poster-txt p{margin:.35rem 0 0;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase}
-.poster-txt .big{font-family:var(--serif);font-size:1.35rem;letter-spacing:.02em;text-transform:none;display:inline-block;margin:0 .3rem;vertical-align:-.1em}
-.poster-txt hr{border:0;height:1px;background:rgba(255,255,255,.6);width:56%;margin:.6rem auto 0}
-.poster-time{margin:.9rem 0 0;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint)}
+      .posters {
+        background: var(--cream);
+      }
+      .poster {
+        margin-top: clamp(2.5rem, 7vh, 4rem);
+      }
+      .poster-head {
+        margin-bottom: 1.1rem;
+      }
+      .poster-date {
+        margin: 0;
+        font-size: 0.6rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        color: var(--rose-lit);
+      }
+      .poster-name {
+        font-family: var(--script);
+        color: var(--rose);
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        margin: 0.1rem 0 0;
+      }
+      .poster-tag {
+        font-family: var(--script);
+        color: var(--gold-deep);
+        font-size: clamp(1rem, 3.2vw, 1.25rem);
+        margin: 0;
+      }
+      .poster-card {
+        position: relative;
+        width: min(100%, 340px);
+        margin-inline: auto;
+        aspect-ratio: 3/4.4;
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--night);
+        border: 5px solid #fff;
+        box-shadow: 0 18px 44px rgba(58, 42, 34, 0.26);
+      }
+      .poster-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      /* fallback scene inside a poster when no artwork is set */
+      .poster-fallback {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            80% 50% at 50% 88%,
+            rgba(242, 169, 59, 0.5),
+            transparent 70%
+          ),
+          linear-gradient(180deg, #16294a 0%, #1d3459 52%, #241a3c 100%);
+      }
+      .poster-lights {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 32%;
+      }
+      .poster-lights svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+        overflow: visible;
+      }
+      .poster-ph {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 14%;
+        text-align: center;
+        font-size: 0.6rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 241, 230, 0.55);
+      }
+      .poster-txt {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 7%;
+        z-index: 3;
+        text-align: center;
+        color: #fff;
+        text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+        padding-inline: 1rem;
+      }
+      .poster-txt h4 {
+        font-family: var(--script);
+        font-size: clamp(1.5rem, 5.5vw, 2rem);
+        margin: 0;
+        font-weight: 400;
+      }
+      .poster-txt p {
+        margin: 0.35rem 0 0;
+        font-size: 0.66rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .poster-txt .big {
+        font-family: var(--serif);
+        font-size: 1.35rem;
+        letter-spacing: 0.02em;
+        text-transform: none;
+        display: inline-block;
+        margin: 0 0.3rem;
+        vertical-align: -0.1em;
+      }
+      .poster-txt hr {
+        border: 0;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.6);
+        width: 56%;
+        margin: 0.6rem auto 0;
+      }
+      .poster-time {
+        margin: 0.9rem 0 0;
+        font-size: 0.66rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+      }
 
-/* ============================================================
+      /* ============================================================
    6 · DETAIL ZIGZAG (ornate frames)
    ============================================================ */
-.details{background:var(--blush);position:relative;overflow:hidden}
-.details::before{
-  content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
-  background:repeating-conic-gradient(from 0deg at 50% 38%,
-    rgba(255,255,255,.55) 0deg 3deg,transparent 3deg 9deg);
-  -webkit-mask-image:radial-gradient(60% 55% at 50% 38%,#000,transparent 72%);
-  mask-image:radial-gradient(60% 55% at 50% 38%,#000,transparent 72%);
-}
-.details .wrap{position:relative;z-index:1}
-.gilt{
-  position:relative;margin:0;padding:clamp(8px,2vw,13px);
-  background:linear-gradient(135deg,#F7E3AC 0%,#C9A227 14%,#8A6716 28%,#F2D89B 44%,
-                              #C9A227 60%,#7E5D14 76%,#EFD494 90%,#B8901E 100%);
-  border-radius:3px;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.35),inset 0 0 0 2px rgba(120,88,18,.35),
-             0 12px 30px rgba(58,42,34,.2);
-}
-.gilt::after{
-  content:'';position:absolute;inset:0;pointer-events:none;border-radius:3px;
-  background-image:var(--rosette),var(--rosette),var(--rosette),var(--rosette);
-  background-repeat:no-repeat;background-size:clamp(13px,3vw,19px);
-  background-position:left top,right top,left bottom,right bottom;
-}
-.gilt > *{position:relative;z-index:1;box-shadow:0 0 0 1px rgba(74,52,16,.55)}
-.photo{width:100%;aspect-ratio:var(--ar,4/5);background:linear-gradient(135deg,var(--shell),#EAD7C2);
-  object-fit:cover;display:grid;place-items:center}
-.photo span{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);text-align:center;padding:.75rem;line-height:1.7}
-.row{display:grid;grid-template-columns:minmax(0,150px) 1fr;gap:clamp(1rem,4vw,2.5rem);align-items:center;padding:clamp(1rem,3vh,1.6rem) 0}
-.row:nth-of-type(even){grid-template-columns:1fr minmax(0,150px)}
-.row:nth-of-type(even) .row-art{order:2}
-.row:nth-of-type(even) .row-txt{order:1;text-align:right;margin-left:auto}
-.row-txt{max-width:32rem}
-.row-name{margin:0 0 .5rem;font-size:.62rem;font-weight:500;text-transform:uppercase;letter-spacing:.28em;color:var(--amber);line-height:1.7}
-.row-desc{font-family:var(--serif);font-style:italic;color:var(--ink-soft);margin:0;line-height:1.95}
-.row-venue{display:block;margin-top:.45rem;font-family:var(--sans);font-style:normal;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}
-.cta{
-  display:inline-block;margin-top:clamp(1.75rem,4vh,2.5rem);
-  background:linear-gradient(180deg,#C24A57,#96222F);color:#FFF3E2;border:0;border-radius:999px;
-  cursor:pointer;font-size:.64rem;font-weight:500;text-transform:uppercase;letter-spacing:.22em;
-  padding:.95rem 2.3rem;box-shadow:0 8px 20px rgba(124,31,34,.3);
-  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
-}
-.cta:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(124,31,34,.4)}
-.travel{margin-top:clamp(2.25rem,6vh,3.5rem);padding-top:clamp(1.75rem,4vh,2.5rem);border-top:1px solid rgba(201,169,97,.45)}
-.travel dl{margin:0;display:grid;grid-template-columns:minmax(6.5rem,9rem) 1fr;gap:.8rem clamp(1.25rem,4vw,2.25rem)}
-.travel dt{font-size:.6rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
-.travel dd{margin:0;font-size:.9rem;color:var(--ink-soft)}
+      .details {
+        background: var(--blush);
+        position: relative;
+        overflow: hidden;
+      }
+      .details::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.5;
+        background: repeating-conic-gradient(
+          from 0deg at 50% 38%,
+          rgba(255, 255, 255, 0.55) 0deg 3deg,
+          transparent 3deg 9deg
+        );
+        -webkit-mask-image: radial-gradient(
+          60% 55% at 50% 38%,
+          #000,
+          transparent 72%
+        );
+        mask-image: radial-gradient(60% 55% at 50% 38%, #000, transparent 72%);
+      }
+      .details .wrap {
+        position: relative;
+        z-index: 1;
+      }
+      .gilt {
+        position: relative;
+        margin: 0;
+        padding: clamp(8px, 2vw, 13px);
+        background: linear-gradient(
+          135deg,
+          #f7e3ac 0%,
+          #c9a227 14%,
+          #8a6716 28%,
+          #f2d89b 44%,
+          #c9a227 60%,
+          #7e5d14 76%,
+          #efd494 90%,
+          #b8901e 100%
+        );
+        border-radius: 3px;
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.35),
+          inset 0 0 0 2px rgba(120, 88, 18, 0.35),
+          0 12px 30px rgba(58, 42, 34, 0.2);
+      }
+      .gilt::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        border-radius: 3px;
+        background-image:
+          var(--rosette), var(--rosette), var(--rosette), var(--rosette);
+        background-repeat: no-repeat;
+        background-size: clamp(13px, 3vw, 19px);
+        background-position:
+          left top,
+          right top,
+          left bottom,
+          right bottom;
+      }
+      .gilt > * {
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 0 0 1px rgba(74, 52, 16, 0.55);
+      }
+      .photo {
+        width: 100%;
+        aspect-ratio: var(--ar, 4/5);
+        background: linear-gradient(135deg, var(--shell), #ead7c2);
+        object-fit: cover;
+        display: grid;
+        place-items: center;
+      }
+      .photo span {
+        font-size: 0.58rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        text-align: center;
+        padding: 0.75rem;
+        line-height: 1.7;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: minmax(0, 150px) 1fr;
+        gap: clamp(1rem, 4vw, 2.5rem);
+        align-items: center;
+        padding: clamp(1rem, 3vh, 1.6rem) 0;
+      }
+      .row:nth-of-type(even) {
+        grid-template-columns: 1fr minmax(0, 150px);
+      }
+      .row:nth-of-type(even) .row-art {
+        order: 2;
+      }
+      .row:nth-of-type(even) .row-txt {
+        order: 1;
+        text-align: right;
+        margin-left: auto;
+      }
+      .row-txt {
+        max-width: 32rem;
+      }
+      .row-name {
+        margin: 0 0 0.5rem;
+        font-size: 0.62rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        color: var(--amber);
+        line-height: 1.7;
+      }
+      .row-desc {
+        font-family: var(--serif);
+        font-style: italic;
+        color: var(--ink-soft);
+        margin: 0;
+        line-height: 1.95;
+      }
+      .row-venue {
+        display: block;
+        margin-top: 0.45rem;
+        font-family: var(--sans);
+        font-style: normal;
+        font-size: 0.6rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+      }
+      .cta {
+        display: inline-block;
+        margin-top: clamp(1.75rem, 4vh, 2.5rem);
+        background: linear-gradient(180deg, #c24a57, #96222f);
+        color: #fff3e2;
+        border: 0;
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 0.64rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        padding: 0.95rem 2.3rem;
+        box-shadow: 0 8px 20px rgba(124, 31, 34, 0.3);
+        transition:
+          transform 0.3s var(--ease),
+          box-shadow 0.3s var(--ease);
+      }
+      .cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 26px rgba(124, 31, 34, 0.4);
+      }
+      .travel {
+        margin-top: clamp(2.25rem, 6vh, 3.5rem);
+        padding-top: clamp(1.75rem, 4vh, 2.5rem);
+        border-top: 1px solid rgba(201, 169, 97, 0.45);
+      }
+      .travel dl {
+        margin: 0;
+        display: grid;
+        grid-template-columns: minmax(6.5rem, 9rem) 1fr;
+        gap: 0.8rem clamp(1.25rem, 4vw, 2.25rem);
+      }
+      .travel dt {
+        font-size: 0.6rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--amber);
+      }
+      .travel dd {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--ink-soft);
+      }
+      .travel a {
+        display: inline-block;
+        margin-top: 0.3rem;
+        color: var(--rose);
+        font-size: 0.62rem;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(168, 50, 63, 0.45);
+        padding-bottom: 1px;
+      }
+      .travel a:hover {
+        border-bottom-color: var(--rose);
+      }
 
-/* ============================================================
+      /* ============================================================
    7 · MOMENTS CAROUSEL
    ============================================================ */
-.moments{background:linear-gradient(180deg,var(--blush) 0%,var(--cream) 100%)}
-.car{
-  display:flex;gap:clamp(1rem,4vw,2rem);overflow-x:auto;scroll-snap-type:x mandatory;
-  margin-top:clamp(2rem,5vh,3rem);padding-bottom:1rem;
-  scrollbar-width:none;-ms-overflow-style:none;
-}
-.car::-webkit-scrollbar{display:none}
-.car figure{
-  flex:0 0 min(74vw,300px);scroll-snap-align:center;margin:0;
-  border:2px solid var(--gold);border-radius:16px;padding:5px;background:var(--cream);
-  box-shadow:0 10px 26px rgba(58,42,34,.14);
-}
-.car .photo{border-radius:11px}
-.car-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1rem}
-.car-dots button{
-  width:7px;height:7px;padding:0;border-radius:50%;border:1px solid var(--gold);
-  background:transparent;cursor:pointer;transition:background .3s
-}
-.car-dots button[aria-current=true]{background:var(--rose);border-color:var(--rose)}
+      .moments {
+        background: linear-gradient(180deg, var(--blush) 0%, var(--cream) 100%);
+      }
+      .car {
+        display: flex;
+        gap: clamp(1rem, 4vw, 2rem);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        margin-top: clamp(2rem, 5vh, 3rem);
+        padding-bottom: 1rem;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .car::-webkit-scrollbar {
+        display: none;
+      }
+      .car figure {
+        flex: 0 0 min(74vw, 300px);
+        scroll-snap-align: center;
+        margin: 0;
+        border: 2px solid var(--gold);
+        border-radius: 16px;
+        padding: 5px;
+        background: var(--cream);
+        box-shadow: 0 10px 26px rgba(58, 42, 34, 0.14);
+      }
+      .car .photo {
+        border-radius: 11px;
+      }
+      .car-dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+      .car-dots button {
+        width: 7px;
+        height: 7px;
+        padding: 0;
+        border-radius: 50%;
+        border: 1px solid var(--gold);
+        background: transparent;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .car-dots button[aria-current="true"] {
+        background: var(--rose);
+        border-color: var(--rose);
+      }
 
-/* ============================================================
+      /* ============================================================
    8 · INVITATION + FOOTER
    ============================================================ */
-.inv-sec{background:var(--cream)}
-.inv{text-align:center;max-width:36rem;margin-inline:auto}
-.inv-line{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--ink-soft);max-width:27rem;margin-inline:auto}
-.inv-names{font-family:var(--script);color:var(--rose);font-size:clamp(2.5rem,9vw,4rem);line-height:1.15;margin:clamp(1.25rem,3vh,2rem) 0 0}
-.inv-names .amp{display:block;font-size:.55em;color:var(--gold-deep);margin:-.08em 0}
-.inv-when{margin:0;font-size:.64rem;font-weight:500;text-transform:uppercase;letter-spacing:.2em;color:var(--amber);line-height:2.2}
-.footer{
-  background:radial-gradient(100% 90% at 50% 0%,#1D3459 0%,#12213D 60%,#0C1728 100%);
-  color:#F7ECD8;text-align:center;padding-block:clamp(3rem,8vh,5rem);position:relative;overflow:hidden;
-}
-.garland{position:absolute;top:0;left:0;width:100%;height:clamp(80px,14vw,140px);pointer-events:none;z-index:1}
-.garland svg{width:100%;height:100%;display:block;overflow:visible}
-.wire{stroke:rgba(233,196,106,.45);stroke-width:1;fill:none}
-.bulb{animation:twinkle 4.5s ease-in-out infinite}
-@keyframes twinkle{0%,100%{opacity:.5}50%{opacity:1}}
-.footer .wrap{position:relative;z-index:2}
-.footer-note{font-family:var(--script);font-size:clamp(1.6rem,5vw,2.5rem);color:var(--gold-lit);margin:0 0 1rem}
-.footer-names{font-size:.64rem;font-weight:500;text-transform:uppercase;letter-spacing:.3em;color:rgba(247,236,216,.88)}
-.footer-year{margin-top:.5rem;font-size:.58rem;letter-spacing:.24em;color:rgba(247,236,216,.5)}
+      .inv-sec {
+        background: var(--cream);
+      }
+      .inv {
+        text-align: center;
+        max-width: 36rem;
+        margin-inline: auto;
+      }
+      .inv-line {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 1.05rem;
+        color: var(--ink-soft);
+        max-width: 27rem;
+        margin-inline: auto;
+      }
+      .inv-names {
+        font-family: var(--script);
+        color: var(--rose);
+        font-size: clamp(2.5rem, 9vw, 4rem);
+        line-height: 1.15;
+        margin: clamp(1.25rem, 3vh, 2rem) 0 0;
+      }
+      .inv-names .amp {
+        display: block;
+        font-size: 0.55em;
+        color: var(--gold-deep);
+        margin: -0.08em 0;
+      }
+      .inv-when {
+        margin: 0;
+        font-size: 0.64rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: var(--amber);
+        line-height: 2.2;
+      }
+      .footer {
+        background: radial-gradient(
+          100% 90% at 50% 0%,
+          #1d3459 0%,
+          #12213d 60%,
+          #0c1728 100%
+        );
+        color: #f7ecd8;
+        text-align: center;
+        padding-block: clamp(3rem, 8vh, 5rem);
+        position: relative;
+        overflow: hidden;
+      }
+      .garland {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: clamp(80px, 14vw, 140px);
+        pointer-events: none;
+        z-index: 1;
+      }
+      .garland svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+        overflow: visible;
+      }
+      .wire {
+        stroke: rgba(233, 196, 106, 0.45);
+        stroke-width: 1;
+        fill: none;
+      }
+      .bulb {
+        animation: twinkle 4.5s ease-in-out infinite;
+      }
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+      .footer .wrap {
+        position: relative;
+        z-index: 2;
+      }
+      .footer-note {
+        font-family: var(--script);
+        font-size: clamp(1.6rem, 5vw, 2.5rem);
+        color: var(--gold-lit);
+        margin: 0 0 1rem;
+      }
+      .footer-names {
+        font-size: 0.64rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: rgba(247, 236, 216, 0.88);
+      }
+      .footer-year {
+        margin-top: 0.5rem;
+        font-size: 0.62rem;
+        letter-spacing: 0.22em;
+        color: rgba(247, 236, 216, 0.62);
+      }
 
-/* ============================================================
+      /* ============================================================
    9 · MUSIC TOGGLE
    ============================================================ */
-.music{
-  position:fixed;right:clamp(.9rem,4vw,1.6rem);bottom:clamp(.9rem,4vw,1.6rem);z-index:90;
-  width:46px;height:46px;border-radius:50%;border:0;cursor:pointer;
-  background:linear-gradient(180deg,#F0894A,#DE6A2E);color:#fff;
-  box-shadow:0 6px 18px rgba(160,70,20,.4);
-  display:grid;place-items:center;
-  transition:transform .3s var(--ease);
-}
-.music:hover{transform:scale(1.06)}
-.music svg{width:20px;height:20px;fill:#fff}
-.music .off{display:none}
-.music[aria-pressed=false] .on{display:none}
-.music[aria-pressed=false] .off{display:block}
+      .music {
+        position: fixed;
+        right: clamp(0.9rem, 4vw, 1.6rem);
+        bottom: clamp(0.9rem, 4vw, 1.6rem);
+        z-index: 90;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: 0;
+        cursor: pointer;
+        background: linear-gradient(180deg, #f0894a, #de6a2e);
+        color: #fff;
+        box-shadow: 0 6px 18px rgba(160, 70, 20, 0.4);
+        display: grid;
+        place-items: center;
+        transition: transform 0.3s var(--ease);
+      }
+      .music:hover {
+        transform: scale(1.06);
+      }
+      .music svg {
+        width: 20px;
+        height: 20px;
+        fill: #fff;
+      }
+      .music .off {
+        display: none;
+      }
+      .music[aria-pressed="false"] .on {
+        display: none;
+      }
+      .music[aria-pressed="false"] .off {
+        display: block;
+      }
 
-/* ============================================================
+      /* ============================================================
    RESPONSIVE
    ============================================================ */
-@media (max-width:760px){
-  .row,.row:nth-of-type(even){grid-template-columns:1fr;gap:.9rem;text-align:center}
-  .row:nth-of-type(even) .row-art{order:0}
-  .row:nth-of-type(even) .row-txt{order:0;text-align:center;margin-left:0}
-  .row-txt{max-width:none}
-  .row-art{max-width:165px;margin-inline:auto}
-  .travel dl{grid-template-columns:1fr;gap:.15rem}
-  .travel dt{margin-top:.85rem}
-  .travel dt:first-child{margin-top:0}
-}
+      /* Short viewports (iPhone SE with browser chrome is ~320x520): the lights
+   clearance plus a full-size doorway no longer fit above the fold. Size the
+   doorway from its HEIGHT here so it stays in proportion — capping the height
+   of a width-driven box just letterboxes it into a squat shape. A landscape
+   phone will scroll a little, which is fine; min-height never clips. */
+      @media (max-height: 600px) {
+        :root {
+          --lights-band: clamp(90px, 20vh, 140px);
+        }
+        .portal {
+          height: min(46svh, 300px);
+          width: auto;
+          max-height: none;
+        }
+      }
+      @media (max-width: 760px) {
+        .row,
+        .row:nth-of-type(even) {
+          grid-template-columns: 1fr;
+          gap: 0.9rem;
+          text-align: center;
+        }
+        .row:nth-of-type(even) .row-art {
+          order: 0;
+        }
+        .row:nth-of-type(even) .row-txt {
+          order: 0;
+          text-align: center;
+          margin-left: 0;
+        }
+        .row-txt {
+          max-width: none;
+        }
+        .row-art {
+          max-width: 165px;
+          margin-inline: auto;
+        }
+        .travel dl {
+          grid-template-columns: 1fr;
+          gap: 0.15rem;
+        }
+        .travel dt {
+          margin-top: 0.85rem;
+        }
+        .travel dt:first-child {
+          margin-top: 0;
+        }
+      }
 
-/* ============================================================
+      /* ============================================================
    REDUCED MOTION
    ============================================================ */
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;
-    transition-duration:.001ms !important;transition-delay:0s !important}
-  .env{display:none !important}
-  .reveal{opacity:1;transform:none}
-  .confetti{display:none}
-  .bulb{opacity:.9}
-}
-</style>
-</head>
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+          transition-delay: 0s !important;
+        }
+        .env {
+          display: none !important;
+        }
+        .doors {
+          display: none !important;
+        } /* the frame stays — it is decoration, not motion */
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+        .confetti {
+          display: none;
+        }
+        .bulb {
+          opacity: 0.9;
+        }
+      }
+    </style>
+  </head>
 
-<body>
+  <body>
+    <!-- heart clip path, used by the scratch cards -->
+    <svg width="0" height="0" aria-hidden="true" style="position: absolute">
+      <defs>
+        <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
+          <path
+            d="M.5,1 C.1,.72 0,.5 0,.3 C0,.12 .14,0 .28,0 C.38,0 .46,.06 .5,.14 C.54,.06 .62,0 .72,0 C.86,0 1,.12 1,.3 C1,.5 .9,.72 .5,1 Z"
+          />
+        </clipPath>
+        <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#E6C883" />
+          <stop offset=".35" stop-color="#C9A961" />
+          <stop offset=".65" stop-color="#B8974E" />
+          <stop offset="1" stop-color="#D8B771" />
+        </linearGradient>
+        <linearGradient id="goldGradDk" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#C1A05A" />
+          <stop offset="1" stop-color="#9C7E3C" />
+        </linearGradient>
+      </defs>
+    </svg>
 
-<!-- heart clip path, used by the scratch cards -->
-<svg width="0" height="0" aria-hidden="true" style="position:absolute">
-  <defs>
-    <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
-      <path d="M.5,1 C.1,.72 0,.5 0,.3 C0,.12 .14,0 .28,0 C.38,0 .46,.06 .5,.14 C.54,.06 .62,0 .72,0 C.86,0 1,.12 1,.3 C1,.5 .9,.72 .5,1 Z"/>
-    </clipPath>
-    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#E6C883"/><stop offset=".35" stop-color="#C9A961"/>
-      <stop offset=".65" stop-color="#B8974E"/><stop offset="1" stop-color="#D8B771"/>
-    </linearGradient>
-    <linearGradient id="goldGradDk" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#C1A05A"/><stop offset="1" stop-color="#9C7E3C"/>
-    </linearGradient>
-  </defs>
-</svg>
-
-<!-- ============================================================
+    <!-- ============================================================
      1 · ENVELOPE
      ============================================================ -->
-<div class="env" id="env" hidden>
-  <button class="env-skip" id="env-skip" type="button">Skip</button>
-  <div class="env-stage">
-    <div class="env-flap">
-      <svg viewBox="0 0 360 140" preserveAspectRatio="none" aria-hidden="true">
-        <path class="env-gold-dk" d="M0,140 L180,0 L360,140 Z"/>
-      </svg>
+    <div class="env" id="env" hidden>
+      <button class="env-skip" id="env-skip" type="button">Skip</button>
+      <div class="env-stage">
+        <div class="env-flap">
+          <svg
+            viewBox="0 0 360 140"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path class="env-gold-dk" d="M0,140 L180,0 L360,140 Z" />
+          </svg>
+        </div>
+        <div class="env-card"><span id="env-mark">N &amp; Y</span></div>
+        <div class="env-body">
+          <svg
+            viewBox="0 0 360 264"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path class="env-gold" d="M0,0 L360,0 L360,264 L0,264 Z" />
+            <path
+              class="env-gold-dk"
+              d="M0,0 L180,96 L360,0 L360,10 L180,106 L0,10 Z"
+              opacity=".45"
+            />
+          </svg>
+        </div>
+      </div>
+      <p class="env-hint" id="env-hint">Tap to reveal</p>
+      <div class="env-flash" aria-hidden="true"></div>
+      <button class="env-tap" id="env-tap" type="button">
+        <span class="visually-hidden">Tap to reveal the invitation</span>
+      </button>
     </div>
-    <div class="env-card"><span id="env-mark">N &amp; Y</span></div>
-    <div class="env-body">
-      <svg viewBox="0 0 360 264" preserveAspectRatio="none" aria-hidden="true">
-        <path class="env-gold" d="M0,0 L360,0 L360,264 L0,264 Z"/>
-        <path class="env-gold-dk" d="M0,0 L180,96 L360,0 L360,10 L180,106 L0,10 Z" opacity=".45"/>
-      </svg>
-    </div>
-  </div>
-  <p class="env-hint" id="env-hint">Tap to reveal</p>
-  <div class="env-flash" aria-hidden="true"></div>
-  <button class="env-tap" id="env-tap" type="button"><span class="visually-hidden">Tap to reveal the invitation</span></button>
-</div>
 
-<a class="skip" href="#families">Skip to content</a>
+    <a class="skip" href="#families">Skip to content</a>
 
-<!-- ============================================================
+    <!-- ============================================================
      2 · HERO
      ============================================================ -->
-<header class="hero" id="hero">
-  <div class="hero-art" id="hero-art" aria-hidden="true"></div>
-  <div class="hero-lights" id="hero-lights" aria-hidden="true"></div>
-  <div class="hero-scrim" aria-hidden="true"></div>
+    <header class="hero" id="hero">
+      <div class="hero-art" id="hero-art" aria-hidden="true"></div>
+      <div class="hero-lights" id="hero-lights" aria-hidden="true"></div>
+      <div class="hero-scrim" aria-hidden="true"></div>
 
-  <div class="hero-top">
-    <p class="hero-kicker reveal">We are getting married</p>
-    <h1 class="hero-names reveal" id="hero-names" style="--d:.12s">
-      <span data-cfg="nameA">Nikhil</span> <span class="amp">&amp;</span> <span data-cfg="nameB">Yashodhara</span>
-    </h1>
-  </div>
+      <div class="hero-top">
+        <p class="hero-kicker reveal">We are getting married</p>
+        <h1 class="hero-names reveal" id="hero-names" style="--d: 0.12s">
+          <span data-cfg="nameA">Nikhil</span> <span class="amp">&amp;</span>
+          <span data-cfg="nameB">Yashodhara</span>
+        </h1>
+      </div>
 
-  <p class="hero-scroll hero-bot reveal" style="--d:.3s">Scroll to explore<i aria-hidden="true"></i></p>
-</header>
+      <!-- The doorway. The photo is injected into .portal-open by buildHero().
+       .doors is [hidden] in markup and shown by JS — with no JS the guest
+       sees the photograph, never a pair of doors that cannot be opened. -->
+      <div class="portal" id="portal">
+        <div class="portal-frame">
+          <div class="portal-open" id="portal-open">
+            <div class="doors" id="doors" aria-hidden="true" hidden>
+              <div class="door-scene">
+                <div class="door-panel door-l">
+                  <i class="door-medallion"></i><i class="door-handle"></i>
+                </div>
+                <div class="door-panel door-r">
+                  <i class="door-medallion"></i><i class="door-handle"></i>
+                </div>
+              </div>
+              <div class="door-seam"></div>
+            </div>
+          </div>
+        </div>
+        <i class="portal-glow" aria-hidden="true"></i>
+      </div>
 
-<main id="main">
+      <p class="hero-scroll hero-bot reveal" style="--d: 0.3s">
+        Scroll to explore<i aria-hidden="true"></i>
+      </p>
+    </header>
 
-<!-- ============================================================
+    <main id="main">
+      <!-- ============================================================
      3 · BLESSING + FAMILIES
      ============================================================ -->
-<section id="families" class="families">
-  <div class="wrap center">
-    <figure class="deity-frame reveal">
-      <!-- TO CHANGE: drop a file in photos/ and update CONFIG.deityImage -->
-      <img class="deity" id="deity" src="photos/mahavir.jpg" alt="Mahavir Bhagwan" width="470" height="653" decoding="async">
-    </figure>
-    <p class="reveal" style="--d:.06s;margin:0">
-      <span class="deva" lang="sa" aria-hidden="true">श्री महावीराय नमः</span>
-      <span class="translit">Shri Mahaviraya Namah</span>
-    </p>
+      <section id="families" class="families">
+        <div class="wrap center">
+          <figure class="deity-frame reveal">
+            <!-- TO CHANGE: drop a file in photos/ and update CONFIG.deityImage -->
+            <img
+              class="deity"
+              id="deity"
+              src="photos/mahavir.jpg"
+              alt="Mahavir Bhagwan"
+              width="470"
+              height="653"
+              decoding="async"
+            />
+          </figure>
+          <p class="reveal" style="--d: 0.06s; margin: 0">
+            <span class="deva" lang="sa" aria-hidden="true"
+              >श्री महावीराय नमः</span
+            >
+            <span class="translit">Shri Mahaviraya Namah</span>
+          </p>
 
-    <div class="fam">
-      <h2 class="fam-name reveal" data-cfg="nameB">Yashodhara</h2>
-      <p class="fam-parents reveal" style="--d:.06s" data-cfg="parentsB">Daughter of Shri Manish Bakliwal &amp; Smt. Komal Bakliwal</p>
-      <p class="fam-with reveal" style="--d:.12s">with</p>
-      <h2 class="fam-name reveal" style="--d:.18s" data-cfg="nameA">Nikhil</h2>
-      <p class="fam-parents reveal" style="--d:.24s" data-cfg="parentsA">Son of Shri Arun Kumar Rara &amp; Smt. Kusum Devi Jain</p>
-    </div>
-  </div>
-</section>
+          <div class="fam">
+            <h2 class="fam-name reveal" data-cfg="nameB">Yashodhara</h2>
+            <p
+              class="fam-parents reveal"
+              style="--d: 0.06s"
+              data-cfg="parentsB"
+            >
+              Daughter of Shri Manish Bakliwal &amp; Smt. Komal Bakliwal
+            </p>
+            <p class="fam-with reveal" style="--d: 0.12s">with</p>
+            <h2 class="fam-name reveal" style="--d: 0.18s" data-cfg="nameA">
+              Nikhil
+            </h2>
+            <p
+              class="fam-parents reveal"
+              style="--d: 0.24s"
+              data-cfg="parentsA"
+            >
+              Son of Shri Arun Kumar Rara &amp; Smt. Kusum Devi Jain
+            </p>
+          </div>
+        </div>
+      </section>
 
-<!-- ============================================================
+      <!-- ============================================================
      4 · REVEAL THE DATE
      ============================================================ -->
-<section id="date" class="date-sec">
-  <div class="confetti" id="confetti" aria-hidden="true"></div>
-  <div class="wrap center">
-    <h2 class="script reveal" style="font-size:clamp(1.9rem,6.5vw,2.9rem);color:#FFF1E6">Reveal the Date</h2>
-    <p class="label reveal" style="--d:.06s;margin:.4rem 0 0">Scratch the hearts below</p>
-    <div class="flourish reveal" style="--d:.1s" aria-hidden="true"><i></i></div>
+      <section id="date" class="date-sec">
+        <div class="confetti" id="confetti" aria-hidden="true"></div>
+        <div class="wrap center">
+          <h2
+            class="script reveal"
+            style="font-size: clamp(1.9rem, 6.5vw, 2.9rem); color: #fff1e6"
+          >
+            Reveal the Date
+          </h2>
+          <p class="label reveal" style="--d: 0.06s; margin: 0.4rem 0 0">
+            Scratch the hearts below
+          </p>
+          <div class="flourish reveal" style="--d: 0.1s" aria-hidden="true">
+            <i></i>
+          </div>
 
-    <div class="hearts" id="hearts"><!-- built in JS --></div>
-    <button class="scratch-all" id="scratch-all" type="button">Reveal without scratching</button>
+          <div class="hearts" id="hearts"><!-- built in JS --></div>
+          <button class="scratch-all" id="scratch-all" type="button">
+            Reveal without scratching
+          </button>
 
-    <div class="date-out" id="date-out" aria-live="polite">
-      <p class="date-big" id="date-big"></p>
-      <p class="date-sub">Wedding Day</p>
-      <div class="cd" id="cd"></div>
-    </div>
-  </div>
-</section>
+          <div class="date-out" id="date-out" aria-live="polite">
+            <p class="date-big" id="date-big"></p>
+            <p class="date-sub">Wedding Day</p>
+            <div class="cd" id="cd"></div>
+          </div>
+        </div>
+      </section>
 
-<!-- ============================================================
+      <!-- ============================================================
      5 · EVENT POSTERS
      ============================================================ -->
-<section id="events" class="posters">
-  <div class="wrap center">
-    <p class="label reveal">Two days of celebration</p>
-    <h2 class="script reveal" style="--d:.06s;font-size:clamp(2rem,7vw,3.25rem)">The Celebrations</h2>
-    <div class="flourish reveal" style="--d:.1s" aria-hidden="true"><i></i></div>
-    <div id="posters"><!-- built in JS --></div>
-  </div>
-</section>
+      <section id="events" class="posters">
+        <div class="wrap center">
+          <p class="label reveal">Two days of celebration</p>
+          <h2
+            class="script reveal"
+            style="--d: 0.06s; font-size: clamp(2rem, 7vw, 3.25rem)"
+          >
+            The Celebrations
+          </h2>
+          <div class="flourish reveal" style="--d: 0.1s" aria-hidden="true">
+            <i></i>
+          </div>
+          <div id="posters"><!-- built in JS --></div>
+        </div>
+      </section>
 
-<!-- ============================================================
+      <!-- ============================================================
      6 · DETAIL ZIGZAG
      ============================================================ -->
-<section id="schedule" class="details">
-  <div class="wrap">
-    <div class="center">
-      <p class="label reveal">What to expect</p>
-      <h2 class="script reveal" style="--d:.06s;font-size:clamp(1.9rem,6.5vw,2.75rem)">Each Celebration</h2>
-      <div class="flourish reveal" style="--d:.1s" aria-hidden="true"><i></i></div>
-    </div>
-    <div id="rows"><!-- built in JS --></div>
-    <div class="center"><button class="cta reveal" id="add-cal" type="button">Add to calendar</button></div>
-    <div class="travel reveal"><dl id="travel"><!-- built in JS --></dl></div>
-  </div>
-</section>
+      <section id="schedule" class="details">
+        <div class="wrap">
+          <div class="center">
+            <p class="label reveal">What to expect</p>
+            <h2
+              class="script reveal"
+              style="--d: 0.06s; font-size: clamp(1.9rem, 6.5vw, 2.75rem)"
+            >
+              Each Celebration
+            </h2>
+            <div class="flourish reveal" style="--d: 0.1s" aria-hidden="true">
+              <i></i>
+            </div>
+          </div>
+          <div id="rows"><!-- built in JS --></div>
+          <div class="center">
+            <button class="cta reveal" id="add-cal" type="button">
+              Add to calendar
+            </button>
+          </div>
+          <div class="travel reveal">
+            <dl id="travel"><!-- built in JS --></dl>
+          </div>
+        </div>
+      </section>
 
-<!-- ============================================================
+      <!-- ============================================================
      7 · MOMENTS
      ============================================================ -->
-<section id="moments" class="moments">
-  <div class="wrap center">
-    <h2 class="script reveal" style="font-size:clamp(2rem,7vw,3.25rem)">Our Beautiful Moments</h2>
-    <p class="label reveal" style="--d:.06s;margin:.4rem 0 0">A journey of love, laughter &amp; forever</p>
-  </div>
-  <div class="wrap">
-    <div class="car reveal" id="car" tabindex="0" role="group" aria-label="Photo carousel, use arrow keys"></div>
-    <div class="car-dots" id="car-dots"></div>
-  </div>
-</section>
+      <section id="moments" class="moments">
+        <div class="wrap center">
+          <h2
+            class="script reveal"
+            style="font-size: clamp(2rem, 7vw, 3.25rem)"
+          >
+            Our Beautiful Moments
+          </h2>
+          <p class="label reveal" style="--d: 0.06s; margin: 0.4rem 0 0">
+            A journey of love, laughter &amp; forever
+          </p>
+        </div>
+        <div class="wrap">
+          <div
+            class="car reveal"
+            id="car"
+            tabindex="0"
+            role="group"
+            aria-label="Photo carousel, use arrow keys"
+          ></div>
+          <div class="car-dots" id="car-dots"></div>
+        </div>
+      </section>
 
-<!-- ============================================================
+      <!-- ============================================================
      8 · INVITATION
      ============================================================ -->
-<section id="invitation" class="inv-sec">
-  <div class="wrap">
-    <div class="inv">
-      <p class="label reveal">Invitation</p>
-      <div class="flourish reveal" style="--d:.05s" aria-hidden="true"><i></i></div>
-      <p class="inv-line reveal" style="--d:.12s;margin-top:1.5rem" data-cfg="invitationLine">request the honour of your presence at the marriage of their children</p>
-      <p class="inv-names reveal" style="--d:.2s">
-        <span data-cfg="nameA">Nikhil</span><span class="amp">&amp;</span><span data-cfg="nameB">Yashodhara</span>
-      </p>
-      <div class="flourish reveal" style="--d:.26s" aria-hidden="true"><i></i></div>
-      <p class="inv-when reveal" style="--d:.32s;margin-top:1.25rem">
-        <span data-cfg="dateShort">Tuesday, 16 February 2027</span><br>
-        <span data-cfg="venue">Marasa Sarovar Premiere</span> · <span data-cfg="city">Bodhgaya, Bihar</span>
-      </p>
-    </div>
-  </div>
-</section>
-</main>
+      <section id="invitation" class="inv-sec">
+        <div class="wrap">
+          <div class="inv">
+            <p class="label reveal">Invitation</p>
+            <div class="flourish reveal" style="--d: 0.05s" aria-hidden="true">
+              <i></i>
+            </div>
+            <p
+              class="inv-line reveal"
+              style="--d: 0.12s; margin-top: 1.5rem"
+              data-cfg="invitationLine"
+            >
+              request the honour of your presence at the marriage of their
+              children
+            </p>
+            <p class="inv-names reveal" style="--d: 0.2s">
+              <span data-cfg="nameA">Nikhil</span><span class="amp">&amp;</span
+              ><span data-cfg="nameB">Yashodhara</span>
+            </p>
+            <div class="flourish reveal" style="--d: 0.26s" aria-hidden="true">
+              <i></i>
+            </div>
+            <p class="inv-when reveal" style="--d: 0.32s; margin-top: 1.25rem">
+              <span data-cfg="dateShort">Tuesday, 16 February 2027</span><br />
+              <span data-cfg="venue">Marasa Sarovar Premiere</span> ·
+              <span data-cfg="city">Bodhgaya, Bihar</span>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
 
-<footer class="footer">
-  <div class="garland" id="garland-foot" aria-hidden="true"></div>
-  <div class="wrap">
-    <p class="footer-note">With the blessings of our families</p>
-    <p class="footer-names"><span data-cfg="nameA">Nikhil</span> &amp; <span data-cfg="nameB">Yashodhara</span></p>
-    <p class="footer-year"><span data-cfg="city">Bodhgaya, Bihar</span> · MMXXVII</p>
-  </div>
-</footer>
+    <footer class="footer">
+      <div class="garland" id="garland-foot" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="footer-note">With the blessings of our families</p>
+        <p class="footer-names">
+          <span data-cfg="nameA">Nikhil</span> &amp;
+          <span data-cfg="nameB">Yashodhara</span>
+        </p>
+        <p class="footer-year">
+          <span data-cfg="city">Bodhgaya, Bihar</span> · MMXXVII
+        </p>
+      </div>
+    </footer>
 
-<button class="music" id="music" type="button" aria-pressed="false" hidden>
-  <span class="visually-hidden">Toggle background music</span>
-  <svg class="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 2v2a8 8 0 0 1 0 16v2a10 10 0 0 0 0-20z"/></svg>
-  <svg class="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm18.6-.6-1.4-1.4-2.6 2.6-2.6-2.6-1.4 1.4 2.6 2.6-2.6 2.6 1.4 1.4 2.6-2.6 2.6 2.6 1.4-1.4-2.6-2.6z"/></svg>
-</button>
+    <button class="music" id="music" type="button" aria-pressed="false" hidden>
+      <span class="visually-hidden">Toggle background music</span>
+      <svg class="on" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 2v2a8 8 0 0 1 0 16v2a10 10 0 0 0 0-20z"
+        />
+      </svg>
+      <svg class="off" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M3 9v6h4l5 4V5L7 9H3zm18.6-.6-1.4-1.4-2.6 2.6-2.6-2.6-1.4 1.4 2.6 2.6-2.6 2.6 1.4 1.4 2.6-2.6 2.6 2.6 1.4-1.4-2.6-2.6z"
+        />
+      </svg>
+    </button>
 
-<script>
-/* ============================================================
+    <script>
+      /* ============================================================
    CONFIG — everything you change lives here.
    Any `*Image` / `src` set to null shows a designed fallback,
    so the page never looks broken while art is still coming.
    ============================================================ */
-const CONFIG = {
-  nameA: 'Nikhil',
-  nameB: 'Yashodhara',
-  initials: ['N', 'Y'],
-  dateISO: '2027-02-16T11:00:00',      // ← set the muhurat time for a true countdown
-  dateShort: 'Tuesday, 16 February 2027',
-  dateScript: '16th February',
-  venue: 'Marasa Sarovar Premiere',
-  city: 'Bodhgaya, Bihar',
-  parentsA: 'Son of Shri Arun Kumar Rara & Smt. Kusum Devi Jain',
-  parentsB: 'Daughter of Shri Manish Bakliwal & Smt. Komal Bakliwal',
-  invitationLine: 'request the honour of your presence at the marriage of their children',
+      const CONFIG = {
+        nameA: "Nikhil",
+        nameB: "Yashodhara",
+        initials: ["N", "Y"],
+        dateISO: "2027-02-16T11:00:00", // ← set the muhurat time for a true countdown
+        // All-day range for the .ics export. Inclusive on both ends; the exporter
+        // adds the RFC-5545 exclusive DTEND itself.
+        calFromISO: "2027-02-15",
+        calToISO: "2027-02-16",
+        dateShort: "Tuesday, 16 February 2027",
+        dateScript: "16th February",
+        venue: "Marasa Sarovar Premiere",
+        city: "Bodhgaya, Bihar",
+        parentsA: "Son of Shri Arun Kumar Rara & Smt. Kusum Devi Jain",
+        parentsB: "Daughter of Shri Manish Bakliwal & Smt. Komal Bakliwal",
+        invitationLine:
+          "request the honour of your presence at the marriage of their children",
 
-  heroImage: null,        // ← 'art/hero.jpg'  full-bleed illustrated scene, portrait-safe
-  musicSrc:  null,        // ← 'audio/track.mp3'  the toggle stays hidden until this is set
+        heroImage: "photos/intro.webp", // ← shown inside the doorway; null shows a labelled placeholder
+        heroPosition: "50% 38%", // object-position within the doorway opening
+        musicSrc: null, // ← 'audio/track.mp3'  the toggle stays hidden until this is set
+        deityImage: "photos/mahavir.jpg",
+        deityAlt: "Mahavir Bhagwan",
 
-  // Scratch hearts. Values are revealed one heart at a time.
-  scratch: [
-    { label: 'Day',   value: '16'  },
-    { label: 'Month', value: 'Feb' },
-    { label: 'Year',  value: '2027' }
-  ],
+        // Scratch hearts. Values are revealed one heart at a time.
+        scratch: [
+          { label: "Day", value: "16" },
+          { label: "Month", value: "Feb" },
+          { label: "Year", value: "2027" },
+        ],
 
-  events: [
-    { name: 'Mehendi',   tag: 'Where it begins',      day: 'Monday',  dd: '15', mon: 'February', yr: '2027',
-      time: 'Morning · time TBC',   art: null,
-      desc: 'Green, unhurried and full of chatter. Cool morning air, henna, and the first of everyone arriving.' },
-    { name: 'Haldi',     tag: 'Turmeric and sunshine', day: 'Monday', dd: '15', mon: 'February', yr: '2027',
-      time: 'Afternoon · time TBC', art: null,
-      desc: 'Turmeric, sunshine and absolutely no dignity preserved. Wear something you do not love.' },
-    { name: 'Sangeet',   tag: 'The loud one',          day: 'Monday', dd: '15', mon: 'February', yr: '2027',
-      time: 'Evening · time TBC',   art: null,
-      desc: 'Loud, bright and unapologetically celebratory. Bring your dancing shoes and no restraint.' },
-    { name: 'Ceremony',  tag: 'The vows',              day: 'Tuesday', dd: '16', mon: 'February', yr: '2027',
-      time: 'Muhurat · time TBC',   art: null,
-      desc: 'Peaceful and serene. The rituals we have been waiting for, among the people we love most.' },
-    { name: 'Reception', tag: 'One last night',        day: 'Tuesday', dd: '16', mon: 'February', yr: '2027',
-      time: 'Evening · time TBC',   art: null,
-      desc: 'Lights, dinner and a long night of it. The last and largest gathering of the two days.' }
-  ],
+        events: [
+          {
+            name: "Mehendi",
+            tag: "Where it begins",
+            day: "Monday",
+            dd: "15",
+            mon: "February",
+            yr: "2027",
+            time: "Morning · time TBC",
+            art: null,
+            desc: "Green, unhurried and full of chatter. Cool morning air, henna, and the first of everyone arriving.",
+          },
+          {
+            name: "Haldi",
+            tag: "Turmeric and sunshine",
+            day: "Monday",
+            dd: "15",
+            mon: "February",
+            yr: "2027",
+            time: "Afternoon · time TBC",
+            art: null,
+            desc: "Turmeric, sunshine and absolutely no dignity preserved. Wear something you do not love.",
+          },
+          {
+            name: "Sangeet",
+            tag: "The loud one",
+            day: "Monday",
+            dd: "15",
+            mon: "February",
+            yr: "2027",
+            time: "Evening · time TBC",
+            art: null,
+            desc: "Loud, bright and unapologetically celebratory. Bring your dancing shoes and no restraint.",
+          },
+          {
+            name: "Ceremony",
+            tag: "The vows",
+            day: "Tuesday",
+            dd: "16",
+            mon: "February",
+            yr: "2027",
+            time: "Muhurat · time TBC",
+            art: null,
+            desc: "Peaceful and serene. The rituals we have been waiting for, among the people we love most.",
+          },
+          {
+            name: "Reception",
+            tag: "One last night",
+            day: "Tuesday",
+            dd: "16",
+            mon: "February",
+            yr: "2027",
+            time: "Evening · time TBC",
+            art: null,
+            desc: "Lights, dinner and a long night of it. The last and largest gathering of the two days.",
+          },
+        ],
 
-  moments: [
-    { src: null, ar: '3/4', alt: '', label: 'Photo · 3:4' },
-    { src: null, ar: '3/4', alt: '', label: 'Photo · 3:4' },
-    { src: null, ar: '3/4', alt: '', label: 'Photo · 3:4' },
-    { src: null, ar: '3/4', alt: '', label: 'Photo · 3:4' }
-  ],
+        moments: [
+          { src: null, ar: "3/4", alt: "", label: "Photo · 3:4" },
+          { src: null, ar: "3/4", alt: "", label: "Photo · 3:4" },
+          { src: null, ar: "3/4", alt: "", label: "Photo · 3:4" },
+          { src: null, ar: "3/4", alt: "", label: "Photo · 3:4" },
+        ],
 
-  // No distances stated on purpose — confirm locally, then add them here.
-  travel: [
-    { label: 'Getting there', text: 'Gaya Airport (GAY) is the nearest. Patna Airport (PAT) is the larger alternative — please confirm drive times when booking.' },
-    { label: 'Where to stay', text: 'A room block is held at Marasa Sarovar Premiere, Bodhgaya. Details to follow with your invitation.' },
-    { label: 'What to wear',  text: 'February days are warm and evenings turn genuinely cold — a shawl or jacket is welcome for the evening functions.' },
-    { label: 'Dining',        text: 'All meals will be pure vegetarian, with Jain fare available throughout.' }
-  ]
-};
+        // No distances stated on purpose — confirm locally, then add them here.
+        // Optional `href` / `hrefText` render a link under the entry.
+        travel: [
+          {
+            label: "Getting there",
+            text: "Gaya Airport (GAY) is the nearest. Patna Airport (PAT) is the larger alternative — please confirm drive times when booking.",
+          },
+          {
+            label: "Where to stay",
+            text: "A room block is held at Marasa Sarovar Premiere, Bodhgaya. Details to follow with your invitation.",
+            href: "https://www.google.com/maps/search/?api=1&query=Marasa+Sarovar+Premiere+Bodhgaya",
+            hrefText: "Open in Maps",
+          },
+          {
+            label: "What to wear",
+            text: "February days are warm and evenings turn genuinely cold — a shawl or jacket is welcome for the evening functions.",
+          },
+          {
+            label: "Dining",
+            text: "All meals will be pure vegetarian, with Jain fare available throughout.",
+          },
+        ],
+      };
 
-const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const $ = id => document.getElementById(id);
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-let heroItems = [];
+      const REDUCED = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      const $ = (id) => document.getElementById(id);
+      const esc = (s) =>
+        String(s).replace(
+          /[&<>"]/g,
+          (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
+        );
+      let heroItems = [];
 
-function photoHTML(p, ar) {
-  const r = ar || p.ar || '4/5';
-  return p.src
-    ? `<img class="photo" style="--ar:${esc(r)}" src="${esc(p.src)}" alt="${esc(p.alt || '')}">`
-    : `<div class="photo" style="--ar:${esc(r)}"><span>${esc(p.label || 'Photo')}</span></div>`;
-}
+      function photoHTML(p, ar) {
+        const r = ar || p.ar || "4/5";
+        return p.src
+          ? `<img class="photo" style="--ar:${esc(r)}" src="${esc(p.src)}" alt="${esc(p.alt || "")}">`
+          : `<div class="photo" style="--ar:${esc(r)}"><span>${esc(p.label || "Photo")}</span></div>`;
+      }
 
-/* ---------- string lights ----------
+      /* ---------- string lights ----------
    The viewBox is set to the element's PIXEL size, so the SVG maps 1:1 and
    the bulbs stay circular. preserveAspectRatio="none" would stretch them
    into capsules on any non-square box. */
-function lightsSVG(el, opts) {
-  const W = Math.max(240, el.clientWidth || 1200);
-  const H = Math.max(60, el.clientHeight || 200);
-  const ns = 'http://www.w3.org/2000/svg';
-  const svg = document.createElementNS(ns, 'svg');
-  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-  const rows = opts.rows || 1;
-  const swags = Math.max(2, Math.round(W / (opts.span || 190)));
-  const sag = H * (opts.sagRatio || 0.22);
-  const r = opts.r || Math.max(2.2, W / 150);
-  let n = 0;
-  for (let row = 0; row < rows; row++) {
-    const top = H * 0.04 + row * (H * (opts.rowGap || 0.16));
-    const off = row % 2 ? (W / swags) / 2 : 0;
-    for (let s = -1; s <= swags; s++) {
-      const x0 = (W / swags) * s + off, x1 = x0 + W / swags;
-      const yAt = t => top + Math.sin(Math.PI * t) * sag;
-      const path = document.createElementNS(ns, 'path');
-      let d = `M${x0.toFixed(1)},${yAt(0).toFixed(1)}`;
-      for (let i = 1; i <= 20; i++) { const t = i / 20; d += ` L${(x0 + (x1 - x0) * t).toFixed(1)},${yAt(t).toFixed(1)}`; }
-      path.setAttribute('d', d); path.setAttribute('class', 'wire');
-      svg.appendChild(path);
-      const bulbs = opts.bulbs || 9;
-      for (let i = 0; i <= bulbs; i++) {
-        const t = i / bulbs;
-        const c = document.createElementNS(ns, 'circle');
-        c.setAttribute('cx', (x0 + (x1 - x0) * t).toFixed(1));
-        c.setAttribute('cy', yAt(t).toFixed(1));
-        c.setAttribute('r', r.toFixed(1));
-        c.setAttribute('fill', '#FFE9A8');
-        c.setAttribute('class', 'bulb');
-        c.style.animationDelay = ((n++ % 9) * 0.5).toFixed(1) + 's';
-        c.style.filter = 'drop-shadow(0 0 ' + (r * 1.6).toFixed(1) + 'px rgba(255,214,120,.95))';
-        svg.appendChild(c);
+      function lightsSVG(el, opts) {
+        const W = Math.max(240, el.clientWidth || 1200);
+        const H = Math.max(60, el.clientHeight || 200);
+        const ns = "http://www.w3.org/2000/svg";
+        const svg = document.createElementNS(ns, "svg");
+        svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+        const rows = opts.rows || 1;
+        const swags = Math.max(2, Math.round(W / (opts.span || 190)));
+        const sag = H * (opts.sagRatio || 0.22);
+        const r = opts.r || Math.max(2.2, W / 150);
+        let n = 0;
+        for (let row = 0; row < rows; row++) {
+          const top = H * 0.04 + row * (H * (opts.rowGap || 0.16));
+          const off = row % 2 ? W / swags / 2 : 0;
+          for (let s = -1; s <= swags; s++) {
+            const x0 = (W / swags) * s + off,
+              x1 = x0 + W / swags;
+            const yAt = (t) => top + Math.sin(Math.PI * t) * sag;
+            const path = document.createElementNS(ns, "path");
+            let d = `M${x0.toFixed(1)},${yAt(0).toFixed(1)}`;
+            for (let i = 1; i <= 20; i++) {
+              const t = i / 20;
+              d += ` L${(x0 + (x1 - x0) * t).toFixed(1)},${yAt(t).toFixed(1)}`;
+            }
+            path.setAttribute("d", d);
+            path.setAttribute("class", "wire");
+            svg.appendChild(path);
+            const bulbs = opts.bulbs || 9;
+            for (let i = 0; i <= bulbs; i++) {
+              const t = i / bulbs;
+              const c = document.createElementNS(ns, "circle");
+              c.setAttribute("cx", (x0 + (x1 - x0) * t).toFixed(1));
+              c.setAttribute("cy", yAt(t).toFixed(1));
+              c.setAttribute("r", r.toFixed(1));
+              c.setAttribute("fill", "#FFE9A8");
+              c.setAttribute("class", "bulb");
+              c.style.animationDelay = ((n++ % 9) * 0.5).toFixed(1) + "s";
+              c.style.filter =
+                "drop-shadow(0 0 " +
+                (r * 1.6).toFixed(1) +
+                "px rgba(255,214,120,.95))";
+              svg.appendChild(c);
+            }
+          }
+        }
+        el.replaceChildren(svg);
       }
-    }
-  }
-  el.replaceChildren(svg);
-}
 
-/* ---------- marigold garland (footer) ---------- */
-function garland(el, swags) {
-  const W = 1200, H = 150, sag = 46;
-  const ns = 'http://www.w3.org/2000/svg';
-  const svg = document.createElementNS(ns, 'svg');
-  svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('preserveAspectRatio', 'none');
-  const petal = ['#F2A93B', '#E8821E', '#F5C542', '#D96F16'];
-  let n = 0;
-  for (let s = 0; s < swags; s++) {
-    const x0 = (W / swags) * s, x1 = (W / swags) * (s + 1);
-    const yAt = t => 6 + Math.sin(Math.PI * t) * sag;
-    const flowers = 14;
-    for (let i = 0; i <= flowers; i++) {
-      const t = i / flowers, cx = x0 + (x1 - x0) * t, cy = yAt(t), r = 7 + ((i * 7) % 4);
-      for (let p = 0; p < 6; p++) {
-        const a = (Math.PI * 2 * p) / 6 + i;
-        const c = document.createElementNS(ns, 'circle');
-        c.setAttribute('cx', (cx + Math.cos(a) * r * .52).toFixed(1));
-        c.setAttribute('cy', (cy + Math.sin(a) * r * .52).toFixed(1));
-        c.setAttribute('r', (r * .58).toFixed(1));
-        c.setAttribute('fill', petal[(i + p) % 4]); c.setAttribute('opacity', '.92');
-        svg.appendChild(c);
+      /* ---------- marigold garland (footer) ---------- */
+      function garland(el, swags) {
+        const W = 1200,
+          H = 150,
+          sag = 46;
+        const ns = "http://www.w3.org/2000/svg";
+        const svg = document.createElementNS(ns, "svg");
+        svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+        svg.setAttribute("preserveAspectRatio", "none");
+        const petal = ["#F2A93B", "#E8821E", "#F5C542", "#D96F16"];
+        let n = 0;
+        for (let s = 0; s < swags; s++) {
+          const x0 = (W / swags) * s,
+            x1 = (W / swags) * (s + 1);
+          const yAt = (t) => 6 + Math.sin(Math.PI * t) * sag;
+          const flowers = 14;
+          for (let i = 0; i <= flowers; i++) {
+            const t = i / flowers,
+              cx = x0 + (x1 - x0) * t,
+              cy = yAt(t),
+              r = 7 + ((i * 7) % 4);
+            for (let p = 0; p < 6; p++) {
+              const a = (Math.PI * 2 * p) / 6 + i;
+              const c = document.createElementNS(ns, "circle");
+              c.setAttribute("cx", (cx + Math.cos(a) * r * 0.52).toFixed(1));
+              c.setAttribute("cy", (cy + Math.sin(a) * r * 0.52).toFixed(1));
+              c.setAttribute("r", (r * 0.58).toFixed(1));
+              c.setAttribute("fill", petal[(i + p) % 4]);
+              c.setAttribute("opacity", ".92");
+              svg.appendChild(c);
+            }
+            const core = document.createElementNS(ns, "circle");
+            core.setAttribute("cx", cx.toFixed(1));
+            core.setAttribute("cy", cy.toFixed(1));
+            core.setAttribute("r", (r * 0.42).toFixed(1));
+            core.setAttribute("fill", "#C25E10");
+            svg.appendChild(core);
+            if (i % 3 === 1) {
+              const len = 22 + ((i * 13) % 28);
+              const l = document.createElementNS(ns, "line");
+              l.setAttribute("x1", cx.toFixed(1));
+              l.setAttribute("y1", cy.toFixed(1));
+              l.setAttribute("x2", cx.toFixed(1));
+              l.setAttribute("y2", (cy + len).toFixed(1));
+              l.setAttribute("class", "wire");
+              svg.appendChild(l);
+              const b = document.createElementNS(ns, "circle");
+              b.setAttribute("cx", cx.toFixed(1));
+              b.setAttribute("cy", (cy + len + 4).toFixed(1));
+              b.setAttribute("r", "4");
+              b.setAttribute("fill", "#FFE9A8");
+              b.setAttribute("class", "bulb");
+              b.style.animationDelay = ((n++ % 9) * 0.5).toFixed(1) + "s";
+              b.style.filter = "drop-shadow(0 0 5px rgba(255,214,120,.95))";
+              svg.appendChild(b);
+            }
+          }
+        }
+        el.replaceChildren(svg);
       }
-      const core = document.createElementNS(ns, 'circle');
-      core.setAttribute('cx', cx.toFixed(1)); core.setAttribute('cy', cy.toFixed(1));
-      core.setAttribute('r', (r * .42).toFixed(1)); core.setAttribute('fill', '#C25E10');
-      svg.appendChild(core);
-      if (i % 3 === 1) {
-        const len = 22 + ((i * 13) % 28);
-        const l = document.createElementNS(ns, 'line');
-        l.setAttribute('x1', cx.toFixed(1)); l.setAttribute('y1', cy.toFixed(1));
-        l.setAttribute('x2', cx.toFixed(1)); l.setAttribute('y2', (cy + len).toFixed(1));
-        l.setAttribute('class', 'wire'); svg.appendChild(l);
-        const b = document.createElementNS(ns, 'circle');
-        b.setAttribute('cx', cx.toFixed(1)); b.setAttribute('cy', (cy + len + 4).toFixed(1));
-        b.setAttribute('r', '4'); b.setAttribute('fill', '#FFE9A8'); b.setAttribute('class', 'bulb');
-        b.style.animationDelay = ((n++ % 9) * .5).toFixed(1) + 's';
-        b.style.filter = 'drop-shadow(0 0 5px rgba(255,214,120,.95))';
-        svg.appendChild(b);
+
+      /* ---------- the doorway's photograph ----------
+   The hero ground is pure CSS now, so all this does is fill the opening.
+   insertAdjacentHTML('afterbegin') puts the photo BEFORE #doors in the DOM,
+   which is what keeps the panels painting on top of it. */
+      function buildHero() {
+        const open = $("portal-open");
+        const html = CONFIG.heroImage
+          ? `<img src="${esc(CONFIG.heroImage)}" alt="" style="--pos:${esc(CONFIG.heroPosition || "50% 38%")}" fetchpriority="high" decoding="async">`
+          : `<div class="portal-ph"><span>Photo · portrait</span></div>`;
+        open.insertAdjacentHTML("afterbegin", html);
+        lightsSVG($("hero-lights"), {
+          span: 200,
+          sagRatio: 0.17,
+          rows: 3,
+          rowGap: 0.17,
+          bulbs: 9,
+        });
       }
-    }
-  }
-  el.appendChild(svg);
-}
 
-/* ---------- hero art: real illustration, or the CSS scene ---------- */
-function buildHero() {
-  const art = $('hero-art');
-  if (CONFIG.heroImage) {
-    art.innerHTML = `<img src="${esc(CONFIG.heroImage)}" alt="">`;
-  } else {
-    art.innerHTML =
-      '<div class="hero-scene">' +
-        '<div class="sun"></div>' +
-        '<svg class="mtn" viewBox="0 0 1200 320" preserveAspectRatio="none">' +
-          '<path d="M0,320 V196 C70,178 118,142 176,120 C236,97 268,138 322,158 C382,180 424,150 486,128 ' +
-                   'C548,106 592,144 654,164 C712,183 754,140 812,120 C874,98 918,142 978,162 ' +
-                   'C1040,183 1092,158 1152,140 L1200,128 V320 Z" fill="#C3D8E8" opacity=".8"/>' +
-          '<path d="M0,320 V244 C60,232 104,196 158,172 C210,149 244,186 296,206 ' +
-                   'C352,227 396,198 452,178 C512,157 556,192 612,212 C670,232 716,206 774,186 ' +
-                   'C834,165 880,200 938,220 C996,240 1046,222 1104,206 L1200,190 V320 Z" fill="#FFFFFF" opacity=".95"/>' +
-        '</svg>' +
-        '<div class="haze"></div>' +
-        '<div class="floor"></div><div class="aisle"></div>' +
-        '<div class="mandap">' +
-          '<svg viewBox="0 0 140 170" aria-hidden="true">' +
-            '<path d="M22,170 V72 A48,48 0 0,1 118,72 V170" fill="none" stroke="#B87333" stroke-width="9" stroke-linecap="round"/>' +
-            '<path d="M22,170 V72 A48,48 0 0,1 118,72 V170" fill="none" stroke="#F2A93B" stroke-width="3.5"/>' +
-            '<circle cx="70" cy="18" r="6" fill="#E8CE8F"/>' +
-            '<circle cx="34" cy="44" r="4.5" fill="#E8821E"/><circle cx="106" cy="44" r="4.5" fill="#E8821E"/>' +
-            '<circle cx="50" cy="27" r="4" fill="#F2A93B"/><circle cx="90" cy="27" r="4" fill="#F2A93B"/>' +
-            '<circle cx="24" cy="96" r="4" fill="#F2A93B"/><circle cx="116" cy="96" r="4" fill="#F2A93B"/>' +
-          '</svg>' +
-        '</div>' +
-        '<div class="glow"></div>' +
-      '</div>';
-  }
-  lightsSVG($('hero-lights'), { span: 200, sagRatio: .17, rows: 3, rowGap: .17, bulbs: 9 });
-}
+      /* ---------- decorations that are sized from layout ----------
+   lightsSVG() bakes the element's pixel size into its viewBox and garland()
+   fixes its swag count, so both have to be redrawn when the box changes shape.
+   Width-only: ignore vertical resizes, which on mobile are just the URL bar. */
+      function drawDecor() {
+        lightsSVG($("hero-lights"), {
+          span: 200,
+          sagRatio: 0.17,
+          rows: 3,
+          rowGap: 0.17,
+          bulbs: 9,
+        });
+        document.querySelectorAll("[data-lights]").forEach((el) =>
+          lightsSVG(el, {
+            span: 130,
+            sagRatio: 0.2,
+            rows: 2,
+            rowGap: 0.26,
+            bulbs: 6,
+            r: 2.4,
+          }),
+        );
+        garland(
+          $("garland-foot"),
+          window.matchMedia("(min-width:760px)").matches ? 6 : 3,
+        );
+      }
 
-/* ---------- content ---------- */
-function hydrate() {
-  document.querySelectorAll('[data-cfg]').forEach(el => {
-    const v = CONFIG[el.dataset.cfg]; if (v) el.textContent = v;
-  });
-  document.title = CONFIG.nameA + ' & ' + CONFIG.nameB + ' · ' + CONFIG.dateShort + ' · ' + CONFIG.city;
-  $('env-mark').textContent = CONFIG.initials.join(' & ');
+      function watchDecor() {
+        let w = window.innerWidth,
+          t = null;
+        window.addEventListener("resize", () => {
+          if (window.innerWidth === w) return; // height-only: mobile browser chrome
+          w = window.innerWidth;
+          clearTimeout(t);
+          t = setTimeout(drawDecor, 180);
+        });
+      }
 
-  // event posters
-  $('posters').innerHTML = CONFIG.events.map((ev, i) => `
-    <div class="poster reveal" style="--d:${(i % 2 * .08).toFixed(2)}s">
+      /* ---------- content ---------- */
+      function hydrate() {
+        document.querySelectorAll("[data-cfg]").forEach((el) => {
+          const v = CONFIG[el.dataset.cfg];
+          if (v) el.textContent = v;
+        });
+        document.title =
+          CONFIG.nameA +
+          " & " +
+          CONFIG.nameB +
+          " · " +
+          CONFIG.dateShort +
+          " · " +
+          CONFIG.city;
+        $("env-mark").textContent = CONFIG.initials.join(" & ");
+
+        if (CONFIG.deityImage) {
+          $("deity").src = CONFIG.deityImage;
+          $("deity").alt = CONFIG.deityAlt || "";
+        }
+
+        // event posters
+        $("posters").innerHTML = CONFIG.events
+          .map(
+            (ev, i) => `
+    <div class="poster reveal" style="--d:${((i % 2) * 0.08).toFixed(2)}s">
       <div class="poster-head">
-        <p class="poster-date">${esc(ev.day)} ${esc(ev.dd)}${esc(ev.mon ? ' ' + ev.mon : '')} ${esc(ev.yr)}</p>
+        <p class="poster-date">${esc(ev.day)} ${esc(ev.dd)}${esc(ev.mon ? " " + ev.mon : "")} ${esc(ev.yr)}</p>
         <h3 class="poster-name">${esc(ev.name)}</h3>
         <p class="poster-tag">${esc(ev.tag)}</p>
       </div>
       <div class="poster-card">
-        ${ev.art
-          ? `<img src="${esc(ev.art)}" alt="${esc(ev.name)}">`
-          : `<div class="poster-fallback"><div class="poster-lights" data-lights></div>
-               <p class="poster-ph">Illustration · 3:4.4</p></div>`}
+        ${
+          ev.art
+            ? `<img src="${esc(ev.art)}" alt="${esc(ev.name)}">`
+            : `<div class="poster-fallback"><div class="poster-lights" data-lights></div>
+               <p class="poster-ph">Illustration · 3:4.4</p></div>`
+        }
         <div class="poster-txt">
           <h4>${esc(ev.name)}</h4>
           <p>${esc(ev.day)} <span class="big">${esc(ev.dd)}</span> ${esc(ev.mon)}</p>
@@ -910,278 +2384,541 @@ function hydrate() {
         </div>
       </div>
       <p class="poster-time">${esc(CONFIG.venue)}</p>
-    </div>`).join('');
-  document.querySelectorAll('[data-lights]').forEach(el =>
-    lightsSVG(el, { span: 130, sagRatio: .2, rows: 2, rowGap: .26, bulbs: 6, r: 2.4 }));
+    </div>`,
+          )
+          .join("");
+        document.querySelectorAll("[data-lights]").forEach((el) =>
+          lightsSVG(el, {
+            span: 130,
+            sagRatio: 0.2,
+            rows: 2,
+            rowGap: 0.26,
+            bulbs: 6,
+            r: 2.4,
+          }),
+        );
 
-  // detail rows
-  $('rows').innerHTML = CONFIG.events.map(ev => `
+        // detail rows
+        $("rows").innerHTML = CONFIG.events
+          .map(
+            (ev) => `
     <div class="row reveal">
-      <figure class="gilt row-art">${photoHTML({ src: ev.art, alt: ev.name, label: ev.name + ' · 3:4' }, '3/4')}</figure>
+      <figure class="gilt row-art">${photoHTML({ src: ev.art, alt: ev.name, label: ev.name + " · 3:4" }, "3/4")}</figure>
       <div class="row-txt">
         <p class="row-name">${esc(ev.name)}</p>
         <p class="row-desc">${esc(ev.desc)}<span class="row-venue">${esc(ev.time)} · ${esc(CONFIG.venue)}</span></p>
       </div>
-    </div>`).join('');
+    </div>`,
+          )
+          .join("");
 
-  $('travel').innerHTML = CONFIG.travel.map(t => `<dt>${esc(t.label)}</dt><dd>${esc(t.text)}</dd>`).join('');
+        $("travel").innerHTML = CONFIG.travel
+          .map((t) => {
+            const link = t.href
+              ? `<br><a href="${esc(t.href)}" target="_blank" rel="noopener">${esc(t.hrefText || "Open link")}</a>`
+              : "";
+            return `<dt>${esc(t.label)}</dt><dd>${esc(t.text)}${link}</dd>`;
+          })
+          .join("");
 
-  // moments carousel
-  $('car').innerHTML = CONFIG.moments.map(p => `<figure>${photoHTML(p)}</figure>`).join('');
-  $('car-dots').innerHTML = CONFIG.moments.map((_, i) =>
-    `<button type="button" aria-current="${i === 0}" aria-label="Photo ${i + 1}"></button>`).join('');
+        // moments carousel
+        $("car").innerHTML = CONFIG.moments
+          .map((p) => `<figure>${photoHTML(p)}</figure>`)
+          .join("");
+        $("car-dots").innerHTML = CONFIG.moments
+          .map(
+            (_, i) =>
+              `<button type="button" aria-current="${i === 0}" aria-label="Photo ${i + 1}"></button>`,
+          )
+          .join("");
 
-  if (CONFIG.musicSrc) $('music').hidden = false;
-}
+        if (CONFIG.musicSrc) $("music").hidden = false;
+      }
 
-/* ---------- scratch hearts ---------- */
-function buildScratch() {
-  const wrap = $('hearts');
-  wrap.innerHTML = CONFIG.scratch.map((s, i) => `
+      /* ---------- scratch hearts ---------- */
+      function buildScratch() {
+        const wrap = $("hearts");
+        wrap.innerHTML = CONFIG.scratch
+          .map(
+            (s, i) => `
     <div class="heart" id="heart${i}">
       <div class="heart-val"><b>${esc(s.value)}</b><i>${esc(s.label)}</i></div>
-    </div>`).join('');
+    </div>`,
+          )
+          .join("");
 
-  let done = 0;
-  const total = CONFIG.scratch.length;
-  const finishOne = el => {
-    if (el.classList.contains('is-done')) return;
-    el.classList.add('is-done');
-    if (++done === total) showDate();
-  };
+        let done = 0;
+        const total = CONFIG.scratch.length;
+        const finishOne = (el) => {
+          if (el.classList.contains("is-done")) return;
+          el.classList.add("is-done");
+          if (++done === total) showDate();
+        };
 
-  CONFIG.scratch.forEach((s, i) => {
-    const host = $('heart' + i);
-    if (REDUCED) { finishOne(host); return; }
+        CONFIG.scratch.forEach((s, i) => {
+          const host = $("heart" + i);
+          if (REDUCED) {
+            finishOne(host);
+            return;
+          }
 
-    const cv = document.createElement('canvas');
-    host.appendChild(cv);
-    const ctx = cv.getContext('2d', { willReadFrequently: true });
+          const cv = document.createElement("canvas");
+          host.appendChild(cv);
+          const ctx = cv.getContext("2d", { willReadFrequently: true });
 
-    const paint = () => {
-      const r = host.getBoundingClientRect();
-      cv.width = Math.max(1, Math.round(r.width));
-      cv.height = Math.max(1, Math.round(r.height));
-      const g = ctx.createLinearGradient(0, 0, cv.width, cv.height);
-      g.addColorStop(0, '#F7E3AC'); g.addColorStop(.45, '#D9B871'); g.addColorStop(1, '#C09A4E');
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = g; ctx.fillRect(0, 0, cv.width, cv.height);
-      ctx.fillStyle = 'rgba(90,64,18,.75)';
-      ctx.font = '500 ' + Math.round(cv.width * .13) + 'px Jost, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('Scratch', cv.width / 2, cv.height * .52);
-    };
-    paint();
-    window.addEventListener('resize', () => { if (!host.classList.contains('is-done')) paint(); });
+          let paintedW = 0,
+            scratched = false;
+          const paint = () => {
+            const r = host.getBoundingClientRect();
+            cv.width = Math.max(1, Math.round(r.width));
+            cv.height = Math.max(1, Math.round(r.height));
+            paintedW = cv.width;
+            const g = ctx.createLinearGradient(0, 0, cv.width, cv.height);
+            g.addColorStop(0, "#F7E3AC");
+            g.addColorStop(0.45, "#D9B871");
+            g.addColorStop(1, "#C09A4E");
+            ctx.globalCompositeOperation = "source-over";
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, cv.width, cv.height);
+            ctx.fillStyle = "rgba(90,64,18,.75)";
+            ctx.font =
+              "500 " + Math.round(cv.width * 0.13) + "px Jost, sans-serif";
+            ctx.textAlign = "center";
+            ctx.fillText("Scratch", cv.width / 2, cv.height * 0.52);
+          };
+          paint();
+          // Repainting resets cv.width, which wipes the canvas. Mobile browsers fire
+          // `resize` when the URL bar shows/hides during a scroll, so only repaint on
+          // a real width change, and never once the guest has started scratching.
+          window.addEventListener("resize", () => {
+            if (scratched || host.classList.contains("is-done")) return;
+            if (Math.round(host.getBoundingClientRect().width) === paintedW)
+              return;
+            paint();
+          });
 
-    let drawing = false, moves = 0;
-    const erase = e => {
-      const r = cv.getBoundingClientRect();
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.beginPath();
-      ctx.arc(e.clientX - r.left, e.clientY - r.top, Math.max(12, cv.width * .16), 0, Math.PI * 2);
-      ctx.fill();
-      if (++moves % 6 === 0 && cleared() > .42) finishOne(host);
-    };
-    const cleared = () => {
-      const d = ctx.getImageData(0, 0, cv.width, cv.height).data;
-      let clear = 0, n = 0;
-      for (let p = 3; p < d.length; p += 4 * 24) { n++; if (d[p] < 128) clear++; }
-      return n ? clear / n : 0;
-    };
-    cv.addEventListener('pointerdown', e => { drawing = true; cv.setPointerCapture(e.pointerId); erase(e); });
-    cv.addEventListener('pointermove', e => { if (drawing) erase(e); });
-    cv.addEventListener('pointerup', () => { drawing = false; if (cleared() > .3) finishOne(host); });
-    cv.addEventListener('pointercancel', () => { drawing = false; });
-  });
+          let drawing = false,
+            moves = 0;
+          const erase = (e) => {
+            const r = cv.getBoundingClientRect();
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.beginPath();
+            ctx.arc(
+              e.clientX - r.left,
+              e.clientY - r.top,
+              Math.max(12, cv.width * 0.16),
+              0,
+              Math.PI * 2,
+            );
+            ctx.fill();
+            if (++moves % 6 === 0 && cleared() > 0.42) finishOne(host);
+          };
+          const cleared = () => {
+            const d = ctx.getImageData(0, 0, cv.width, cv.height).data;
+            let clear = 0,
+              n = 0;
+            for (let p = 3; p < d.length; p += 4 * 24) {
+              n++;
+              if (d[p] < 128) clear++;
+            }
+            return n ? clear / n : 0;
+          };
+          cv.addEventListener("pointerdown", (e) => {
+            drawing = true;
+            scratched = true;
+            cv.setPointerCapture(e.pointerId);
+            erase(e);
+          });
+          cv.addEventListener("pointermove", (e) => {
+            if (drawing) erase(e);
+          });
+          cv.addEventListener("pointerup", () => {
+            drawing = false;
+            if (cleared() > 0.3) finishOne(host);
+          });
+          cv.addEventListener("pointercancel", () => {
+            drawing = false;
+          });
+        });
 
-  // Scratching is pointer-only. This is the keyboard / assistive-tech path,
-  // and the escape hatch for anyone who just wants the date.
-  $('scratch-all').addEventListener('click', () => {
-    CONFIG.scratch.forEach((_, i) => finishOne($('heart' + i)));
-    $('scratch-all').disabled = true;
-    $('scratch-all').textContent = 'Revealed';
-  });
+        // Scratching is pointer-only. This is the keyboard / assistive-tech path,
+        // and the escape hatch for anyone who just wants the date.
+        $("scratch-all").addEventListener("click", () => {
+          CONFIG.scratch.forEach((_, i) => finishOne($("heart" + i)));
+          $("scratch-all").disabled = true;
+          $("scratch-all").textContent = "Revealed";
+        });
 
-  if (REDUCED) { $('scratch-all').hidden = true; }
-}
+        if (REDUCED) {
+          $("scratch-all").hidden = true;
+        }
+      }
 
-let cdTimer = null;
-function showDate() {
-  $('date-big').textContent = CONFIG.dateScript;
-  $('date-out').classList.add('is-shown');
-  tickCountdown();
-  if (!cdTimer) cdTimer = setInterval(tickCountdown, 1000);
-  if (!REDUCED) confetti();
-}
+      let cdTimer = null;
+      function showDate() {
+        $("date-big").textContent = CONFIG.dateScript;
+        $("date-out").classList.add("is-shown");
+        tickCountdown();
+        if (!cdTimer) cdTimer = setInterval(tickCountdown, 1000);
+        if (!REDUCED) confetti();
+      }
 
-function tickCountdown() {
-  const target = new Date(CONFIG.dateISO);
-  let ms = target - new Date();
-  const box = $('cd');
-  if (ms <= 0) {
-    clearInterval(cdTimer); cdTimer = null;
-    box.innerHTML = '<div style="min-width:auto;padding:.7rem 1.4rem"><b>Today</b></div>';
-    return;
-  }
-  const d = Math.floor(ms / 86400000); ms -= d * 86400000;
-  const h = Math.floor(ms / 3600000);  ms -= h * 3600000;
-  const m = Math.floor(ms / 60000);    ms -= m * 60000;
-  const s = Math.floor(ms / 1000);
-  const pad = n => String(n).padStart(2, '0');
-  box.innerHTML =
-    `<div><b>${d}</b><span>Days</span></div>` +
-    `<div><b>${pad(h)}</b><span>Hours</span></div>` +
-    `<div><b>${pad(m)}</b><span>Minutes</span></div>` +
-    `<div><b>${pad(s)}</b><span>Seconds</span></div>`;
-}
+      function tickCountdown() {
+        const target = new Date(CONFIG.dateISO);
+        let ms = target - new Date();
+        const box = $("cd");
+        if (ms <= 0) {
+          clearInterval(cdTimer);
+          cdTimer = null;
+          box.innerHTML =
+            '<div style="min-width:auto;padding:.7rem 1.4rem"><b>Today</b></div>';
+          return;
+        }
+        const d = Math.floor(ms / 86400000);
+        ms -= d * 86400000;
+        const h = Math.floor(ms / 3600000);
+        ms -= h * 3600000;
+        const m = Math.floor(ms / 60000);
+        ms -= m * 60000;
+        const s = Math.floor(ms / 1000);
+        const pad = (n) => String(n).padStart(2, "0");
+        box.innerHTML =
+          `<div><b>${d}</b><span>Days</span></div>` +
+          `<div><b>${pad(h)}</b><span>Hours</span></div>` +
+          `<div><b>${pad(m)}</b><span>Minutes</span></div>` +
+          `<div><b>${pad(s)}</b><span>Seconds</span></div>`;
+      }
 
-function confetti() {
-  const host = $('confetti');
-  if (host.childElementCount) return;
-  const cols = ['#FFD9A8', '#FFF1E6', '#F2A93B', '#FFB3B3', '#E8CE8F'];
-  let html = '';
-  for (let i = 0; i < 44; i++) {
-    const left = (i * 37) % 100, dur = 5 + (i % 5) * 1.4, delay = (i % 11) * .55;
-    html += `<i style="left:${left}%;background:${cols[i % 5]};animation-duration:${dur}s;animation-delay:${delay}s;`
-          + `transform:rotate(${(i * 47) % 360}deg)"></i>`;
-  }
-  host.innerHTML = html;
-}
+      function confetti() {
+        const host = $("confetti");
+        if (host.childElementCount) return;
+        const cols = ["#FFD9A8", "#FFF1E6", "#F2A93B", "#FFB3B3", "#E8CE8F"];
+        let html = "";
+        for (let i = 0; i < 44; i++) {
+          const left = (i * 37) % 100,
+            dur = 5 + (i % 5) * 1.4,
+            delay = (i % 11) * 0.55;
+          html +=
+            `<i style="left:${left}%;background:${cols[i % 5]};animation-duration:${dur}s;animation-delay:${delay}s;` +
+            `--r:${(i * 47) % 360}deg"></i>`;
+        }
+        host.innerHTML = html;
+      }
 
-/* ---------- carousel ---------- */
-function initCar() {
-  const car = $('car'), dots = [...$('car-dots').children];
-  const sync = () => {
-    const i = Math.round(car.scrollLeft / (car.scrollWidth / CONFIG.moments.length));
-    dots.forEach((d, n) => d.setAttribute('aria-current', String(n === Math.min(i, dots.length - 1))));
-  };
-  car.addEventListener('scroll', sync, { passive: true });
-  dots.forEach((d, i) => d.addEventListener('click', () => {
-    car.scrollTo({ left: i * (car.scrollWidth / CONFIG.moments.length), behavior: REDUCED ? 'auto' : 'smooth' });
-  }));
-  car.addEventListener('keydown', e => {
-    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-    e.preventDefault();
-    const step = car.scrollWidth / CONFIG.moments.length;
-    car.scrollBy({ left: e.key === 'ArrowRight' ? step : -step, behavior: REDUCED ? 'auto' : 'smooth' });
-  });
-}
+      /* ---------- carousel ----------
+   Positions come from the figures' real offsets, not scrollWidth/count: the
+   track is wider than the viewport by less than one item, so dividing by the
+   item count overshoots and the last dots all clamp to the same place. And
+   because scroll-snap-align is `center`, scrollLeft 0 is not figure 0. */
+      function initCar() {
+        const car = $("car"),
+          dots = [...$("car-dots").children];
 
-/* ---------- reveals ---------- */
-function initReveals() {
-  const items = document.querySelectorAll('.reveal');
-  if (REDUCED || !('IntersectionObserver' in window)) {
-    items.forEach(el => el.classList.add('is-visible')); return;
-  }
-  const io = new IntersectionObserver((es, obs) => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
-  }), { threshold: .12, rootMargin: '0px 0px -6% 0px' });
-  items.forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight) heroItems.push(el);
-    else io.observe(el);
-  });
-}
-function startPage() {
-  const show = () => heroItems.forEach(el => el.classList.add('is-visible'));
-  if (REDUCED) { show(); return; }
-  void document.body.offsetHeight;
-  requestAnimationFrame(() => requestAnimationFrame(show));
-  setTimeout(show, 200);          // rAF is throttled to zero in background tabs
-}
+        // offsets relative to the first figure, so this holds whoever the
+        // offsetParent happens to be (section[position:relative], today)
+        const boxes = () => {
+          const f = [...car.children];
+          const base = f.length ? f[0].offsetLeft : 0;
+          return f.map((el) => ({
+            left: el.offsetLeft - base,
+            w: el.offsetWidth,
+          }));
+        };
+        const posOf = (i) => {
+          const b = boxes()[i];
+          if (!b) return 0;
+          const max = Math.max(0, car.scrollWidth - car.clientWidth);
+          return Math.min(
+            max,
+            Math.max(0, b.left - (car.clientWidth - b.w) / 2),
+          );
+        };
+        const current = () => {
+          // At the extremes the first/last figure cannot physically be centred (the
+          // track is wider than the viewport by less than one item), so scroll
+          // position, not nearest-centre, is what the dot should report there.
+          const max = Math.max(0, car.scrollWidth - car.clientWidth);
+          if (car.scrollLeft <= 1) return 0;
+          if (car.scrollLeft >= max - 1) return dots.length - 1;
+          const mid = car.scrollLeft + car.clientWidth / 2;
+          let best = 0,
+            bestD = Infinity;
+          boxes().forEach((b, i) => {
+            const d = Math.abs(b.left + b.w / 2 - mid);
+            if (d < bestD) {
+              bestD = d;
+              best = i;
+            }
+          });
+          return best;
+        };
+        const sync = () => {
+          const i = current();
+          dots.forEach((d, n) =>
+            d.setAttribute("aria-current", String(n === i)),
+          );
+        };
+        const goTo = (i) => {
+          const n = Math.max(0, Math.min(dots.length - 1, i));
+          car.scrollTo({
+            left: posOf(n),
+            behavior: REDUCED ? "auto" : "smooth",
+          });
+        };
 
-/* ---------- envelope ---------- */
-function initEnv() {
-  const env = $('env'), tap = $('env-tap'), skip = $('env-skip');
-  const store = {
-    seen() { try { return sessionStorage.getItem('invOpened') === '1'; } catch (e) { return false; } },
-    mark() { try { sessionStorage.setItem('invOpened', '1'); } catch (e) {} }
-  };
-  if (REDUCED || store.seen()) { env.remove(); startPage(); return; }
+        car.addEventListener("scroll", sync, { passive: true });
+        window.addEventListener("resize", sync);
+        dots.forEach((d, i) => d.addEventListener("click", () => goTo(i)));
+        car.addEventListener("keydown", (e) => {
+          if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+          e.preventDefault();
+          goTo(current() + (e.key === "ArrowRight" ? 1 : -1));
+        });
+        sync();
+      }
 
-  let torn = false, opening = false;
-  const timers = [];
-  const teardown = () => {
-    if (torn) return; torn = true;
-    timers.forEach(clearTimeout);
-    store.mark();
-    document.removeEventListener('keydown', onKey, true);
-    env.remove();
-    document.body.classList.remove('is-locked');
-    startPage();
-    const n = $('hero-names'); n.setAttribute('tabindex', '-1'); n.focus({ preventScroll: true });
-  };
-  const open = () => {
-    if (opening) return; opening = true;
-    tap.disabled = true;
-    $('env-hint').classList.add('is-out');
-    env.classList.add('is-opening');
-    timers.push(setTimeout(() => env.classList.add('is-flash'), 620));
-    timers.push(setTimeout(() => env.classList.add('is-gone'), 1250));
-    timers.push(setTimeout(teardown, 1950));
-  };
-  function onKey(e) {
-    if (e.key === 'Escape') { e.preventDefault(); teardown(); return; }
-    if (e.key !== 'Tab') return;
-    const f = [skip, tap].filter(x => !x.disabled);
-    if (!f.length) return;
-    e.preventDefault();
-    const i = f.indexOf(document.activeElement);
-    f[e.shiftKey ? (i <= 0 ? f.length - 1 : i - 1) : (i === f.length - 1 || i === -1 ? 0 : i + 1)].focus();
-  }
-  env.hidden = false;
-  document.body.classList.add('is-locked');
-  tap.addEventListener('click', open);
-  skip.addEventListener('click', teardown);
-  document.addEventListener('keydown', onKey, true);
-  tap.focus();
-}
+      /* ---------- reveals ---------- */
+      function initReveals() {
+        const items = document.querySelectorAll(".reveal");
+        if (REDUCED || !("IntersectionObserver" in window)) {
+          items.forEach((el) => el.classList.add("is-visible"));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (es, obs) =>
+            es.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("is-visible");
+                obs.unobserve(e.target);
+              }
+            }),
+          { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+        );
+        items.forEach((el) => {
+          if (el.getBoundingClientRect().top < window.innerHeight)
+            heroItems.push(el);
+          else io.observe(el);
+        });
+      }
+      function startPage() {
+        const show = () =>
+          heroItems.forEach((el) => el.classList.add("is-visible"));
+        if (REDUCED) {
+          show();
+          return;
+        }
+        void document.body.offsetHeight;
+        requestAnimationFrame(() => requestAnimationFrame(show));
+        setTimeout(show, 200); // rAF is throttled to zero in background tabs
+      }
 
-/* ---------- music ---------- */
-function initMusic() {
-  if (!CONFIG.musicSrc) return;
-  const btn = $('music');
-  const audio = new Audio(CONFIG.musicSrc);
-  audio.loop = true; audio.volume = .5;
-  btn.addEventListener('click', () => {
-    if (audio.paused) {
-      audio.play().then(() => btn.setAttribute('aria-pressed', 'true'))
-                  .catch(() => { /* blocked; stay off */ });
-    } else { audio.pause(); btn.setAttribute('aria-pressed', 'false'); }
-  });
-}
+      /* ---------- hero doorway ----------
+   Called on every path out of the envelope. When the doors play, startPage()
+   is deliberately deferred: fired at teardown as before, the names would reach
+   full opacity behind shut panels and just be sitting there when they part.
+   At 1300ms they rise as the opening widens instead. */
+      function enterHero(playDoors) {
+        const d = $("doors"),
+          p = $("portal");
+        if (!d) {
+          startPage();
+          return;
+        }
+        if (!playDoors || REDUCED) {
+          d.remove();
+          p.classList.add("is-open");
+          startPage();
+          return;
+        }
+        d.hidden = false;
+        void d.offsetHeight; // commit the initial state first
+        setTimeout(() => {
+          // a beat, then the swing
+          d.classList.add("is-open");
+          p.classList.add("is-open"); // the light pool comes up with it
+        }, 400);
+        setTimeout(startPage, 1300);
+        setTimeout(() => d.remove(), 2100); // drop the node once clear
+      }
 
-/* ---------- calendar ---------- */
-function initCal() {
-  $('add-cal').addEventListener('click', () => {
-    const day = CONFIG.dateISO.slice(0, 10).replace(/-/g, '');
-    const d = new Date(CONFIG.dateISO.slice(0, 10) + 'T00:00:00'); d.setDate(d.getDate() + 1);
-    const end = d.toISOString().slice(0, 10).replace(/-/g, '');
-    const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//wedding//EN','BEGIN:VEVENT',
-      'UID:' + day + '-nikhil-yashodhara@wedding',
-      'DTSTART;VALUE=DATE:' + day, 'DTEND;VALUE=DATE:' + end,
-      'SUMMARY:' + CONFIG.nameA + ' & ' + CONFIG.nameB + ' — Wedding',
-      'LOCATION:' + CONFIG.venue + ', ' + CONFIG.city,
-      'DESCRIPTION:Celebrations begin Monday 15 February. Times to be confirmed.',
-      'END:VEVENT','END:VCALENDAR'].join('\r\n');
-    const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
-    const a = document.createElement('a');
-    a.href = url; a.download = 'nikhil-yashodhara-wedding.ics';
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  });
-}
+      /* ---------- envelope ---------- */
+      function initEnv() {
+        const env = $("env"),
+          tap = $("env-tap"),
+          skip = $("env-skip");
+        const store = {
+          seen() {
+            try {
+              return sessionStorage.getItem("invOpened") === "1";
+            } catch (e) {
+              return false;
+            }
+          },
+          mark() {
+            try {
+              sessionStorage.setItem("invOpened", "1");
+            } catch (e) {}
+          },
+        };
+        if (REDUCED || store.seen()) {
+          env.remove();
+          enterHero(false);
+          return;
+        }
 
-/* ------------------------------------------------------------ */
-hydrate();
-buildHero();
-garland($('garland-foot'), window.matchMedia('(min-width:760px)').matches ? 6 : 3);
-buildScratch();
-initCar();
-initReveals();
-initCal();
-initMusic();
-initEnv();
-</script>
-</body>
+        let torn = false,
+          opening = false;
+        const timers = [];
+        const teardown = () => {
+          if (torn) return;
+          torn = true;
+          timers.forEach(clearTimeout);
+          store.mark();
+          document.removeEventListener("keydown", onKey, true);
+          env.remove();
+          document.body.classList.remove("is-locked");
+          enterHero(true);
+          const n = $("hero-names");
+          n.setAttribute("tabindex", "-1");
+          n.focus({ preventScroll: true });
+        };
+        const open = () => {
+          if (opening) return;
+          opening = true;
+          tap.disabled = true;
+          $("env-hint").classList.add("is-out");
+          env.classList.add("is-opening");
+          timers.push(setTimeout(() => env.classList.add("is-flash"), 620));
+          timers.push(setTimeout(() => env.classList.add("is-gone"), 1250));
+          timers.push(setTimeout(teardown, 1950));
+        };
+        function onKey(e) {
+          if (e.key === "Escape") {
+            e.preventDefault();
+            teardown();
+            return;
+          }
+          if (e.key !== "Tab") return;
+          const f = [skip, tap].filter((x) => !x.disabled);
+          if (!f.length) return;
+          e.preventDefault();
+          const i = f.indexOf(document.activeElement);
+          f[
+            e.shiftKey
+              ? i <= 0
+                ? f.length - 1
+                : i - 1
+              : i === f.length - 1 || i === -1
+                ? 0
+                : i + 1
+          ].focus();
+        }
+        env.hidden = false;
+        document.body.classList.add("is-locked");
+        tap.addEventListener("click", open);
+        skip.addEventListener("click", teardown);
+        document.addEventListener("keydown", onKey, true);
+        tap.focus();
+      }
+
+      /* ---------- music ---------- */
+      function initMusic() {
+        if (!CONFIG.musicSrc) return;
+        const btn = $("music");
+        const audio = new Audio(CONFIG.musicSrc);
+        audio.loop = true;
+        audio.volume = 0.5;
+        btn.addEventListener("click", () => {
+          if (audio.paused) {
+            audio
+              .play()
+              .then(() => btn.setAttribute("aria-pressed", "true"))
+              .catch(() => {
+                /* blocked; stay off */
+              });
+          } else {
+            audio.pause();
+            btn.setAttribute("aria-pressed", "false");
+          }
+        });
+      }
+
+      /* ---------- calendar ----------
+   All date maths is done in UTC. The previous version built a local Date and
+   read it back with toISOString(), which shifts the day backwards for any
+   positive UTC offset — at +05:30 the exclusive DTEND landed on DTSTART and
+   the event had zero length. */
+      function icsDate(iso, addDays) {
+        const [y, m, d] = iso.slice(0, 10).split("-").map(Number);
+        return new Date(Date.UTC(y, m - 1, d + (addDays || 0)))
+          .toISOString()
+          .slice(0, 10)
+          .replace(/-/g, "");
+      }
+      // RFC 5545 escaping for TEXT values: backslash, semicolon, comma, newline.
+      const icsText = (s) =>
+        String(s)
+          .replace(/([\\;,])/g, "\\$1")
+          .replace(/\r?\n/g, "\\n");
+
+      function initCal() {
+        $("add-cal").addEventListener("click", () => {
+          const from = CONFIG.calFromISO || CONFIG.dateISO;
+          const to = CONFIG.calToISO || CONFIG.dateISO;
+          const start = icsDate(from);
+          const end = icsDate(to, 1); // DTEND is exclusive
+          const stamp = new Date()
+            .toISOString()
+            .replace(/[-:]/g, "")
+            .replace(/\.\d{3}/, "");
+          const ics = [
+            "BEGIN:VCALENDAR",
+            "VERSION:2.0",
+            "PRODID:-//wedding//EN",
+            "CALSCALE:GREGORIAN",
+            "BEGIN:VEVENT",
+            "UID:" + start + "-nikhil-yashodhara@wedding",
+            "DTSTAMP:" + stamp, // required by RFC 5545
+            "DTSTART;VALUE=DATE:" + start,
+            "DTEND;VALUE=DATE:" + end,
+            "SUMMARY:" +
+              icsText(CONFIG.nameA + " & " + CONFIG.nameB + " — Wedding"),
+            "LOCATION:" + icsText(CONFIG.venue + ", " + CONFIG.city),
+            "DESCRIPTION:" +
+              icsText(
+                "Celebrations begin Monday 15 February. Times to be confirmed.",
+              ),
+            "END:VEVENT",
+            "END:VCALENDAR",
+            "",
+          ].join("\r\n");
+          const url = URL.createObjectURL(
+            new Blob([ics], { type: "text/calendar;charset=utf-8" }),
+          );
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "nikhil-yashodhara-wedding.ics";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          setTimeout(() => URL.revokeObjectURL(url), 1000);
+        });
+      }
+
+      /* ------------------------------------------------------------ */
+      hydrate();
+      buildHero();
+      garland(
+        $("garland-foot"),
+        window.matchMedia("(min-width:760px)").matches ? 6 : 3,
+      );
+      buildScratch();
+      initCar();
+      initReveals();
+      initCal();
+      initMusic();
+      watchDecor();
+      initEnv();
+    </script>
+  </body>
 </html>
