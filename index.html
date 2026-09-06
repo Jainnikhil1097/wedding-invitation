@@ -1132,6 +1132,13 @@
       }
       /* Holds either the illustration or the designed colour card. Same box
          either way, so swapping CONFIG.events[].art changes nothing else. */
+      /* Needs an explicit width. .cel-art below holds only an absolutely
+         positioned <img>, so it has no intrinsic width — if this figure is ever
+         allowed to shrink-to-fit (auto margins disable grid's stretch), the art
+         collapses to 0x0 and disappears. */
+      .row-art {
+        width: 100%;
+      }
       .cel-art {
         position: relative;
         width: 100%;
@@ -1626,7 +1633,7 @@
           max-width: none;
         }
         .row-art {
-          max-width: 260px;
+          width: min(100%, 260px);
           margin-inline: auto;
         }
         .travel dl {
