@@ -1284,6 +1284,7 @@
         aspect-ratio: var(--ar, 4/5);
         background: linear-gradient(135deg, var(--shell), #ead7c2);
         object-fit: cover;
+        object-position: var(--pos, 50% 50%);
         display: grid;
         place-items: center;
       }
@@ -1551,7 +1552,7 @@
         letter-spacing: 0.3em;
         color: rgba(247, 236, 216, 0.88);
       }
-      .footer-year {
+      .footer-place {
         margin-top: 0.5rem;
         font-size: 0.62rem;
         letter-spacing: 0.22em;
@@ -1953,8 +1954,8 @@
           <span data-cfg="nameA">Nikhil</span> &amp;
           <span data-cfg="nameB">Yashodhara</span>
         </p>
-        <p class="footer-year">
-          <span data-cfg="city">Bodhgaya, Bihar</span> · MMXXVII
+        <p class="footer-place">
+          <span data-cfg="city">Bodhgaya, Bihar</span>
         </p>
       </div>
     </footer>
@@ -2089,10 +2090,30 @@
         ],
 
         moments: [
-          { src: null, ar: "3/4", alt: "", label: "Photo · 3:4" },
-          { src: null, ar: "3/4", alt: "", label: "Photo · 3:4" },
-          { src: null, ar: "3/4", alt: "", label: "Photo · 3:4" },
-          { src: null, ar: "3/4", alt: "", label: "Photo · 3:4" },
+          {
+            src: "photos/photo1.jpg",
+            ar: "3/4",
+            pos: "50% 20%", // trims the empty floor below them
+            alt: "Nikhil and Yashodhara standing together",
+          },
+          {
+            src: "photos/photo2.jpg",
+            ar: "3/4",
+            pos: "50% 100%", // bottom-aligned so their feet stay in frame
+            alt: "Nikhil and Yashodhara in matching green beneath a floral arch",
+          },
+          {
+            src: "photos/photo3.jpg",
+            ar: "3/4",
+            pos: "50% 100%", // drops the sky, keeps the garden behind them
+            alt: "Nikhil and Yashodhara in a garden",
+          },
+          {
+            src: "photos/photo4.jpg",
+            ar: "3/4",
+            pos: "50% 50%", // already 3:4, nothing meaningful cropped
+            alt: "Nikhil and Yashodhara seated before a floral backdrop",
+          },
         ],
 
         // No distances stated on purpose — confirm locally, then add them here.
@@ -2133,7 +2154,7 @@
       function photoHTML(p, ar) {
         const r = ar || p.ar || "4/5";
         return p.src
-          ? `<img class="photo" style="--ar:${esc(r)}" src="${esc(p.src)}" alt="${esc(p.alt || "")}">`
+          ? `<img class="photo" style="--ar:${esc(r)};--pos:${esc(p.pos || "50% 50%")}" src="${esc(p.src)}" alt="${esc(p.alt || "")}" loading="lazy" decoding="async">`
           : `<div class="photo" style="--ar:${esc(r)}"><span>${esc(p.label || "Photo")}</span></div>`;
       }
 
