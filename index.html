@@ -2001,7 +2001,10 @@
 
         heroImage: "photos/intro.webp", // ← shown inside the doorway; null shows a labelled placeholder
         heroPosition: "50% 38%", // object-position within the doorway opening
-        musicSrc: null, // ← 'audio/track.mp3'  the toggle stays hidden until this is set
+        // Starts on the envelope tap (browsers require a user gesture) and
+        // fades in. Set to null to hide the toggle and disable audio entirely.
+        musicSrc: "music/background-music.m4a",
+        musicVolume: 0.4,
         deityImage: "photos/mahavir.jpg",
         deityAlt: "Mahavir Bhagwan",
 
@@ -2892,6 +2895,7 @@
           tap.disabled = true;
           $("env-hint").classList.add("is-out");
           env.classList.add("is-opening");
+          if (musicStart) musicStart(); // must be synchronous inside the gesture
           // flap swings first, then the whole sheet lifts off the hero
           timers.push(setTimeout(() => env.classList.add("is-gone"), 900));
           timers.push(setTimeout(teardown, 1600));
@@ -2946,25 +2950,56 @@
       }
 
       /* ---------- music ---------- */
+      /* ---------- background music ----------
+         Autoplay with sound is blocked everywhere, so playback has to begin
+         inside a real user gesture — the envelope tap. initMusic therefore only
+         wires things up and publishes musicStart() for initEnv to call
+         synchronously; calling play() after an await would lose the gesture. */
+      let musicStart = null;
       function initMusic() {
         if (!CONFIG.musicSrc) return;
         const btn = $("music");
-        const audio = new Audio(CONFIG.musicSrc);
+        const audio = new Audio();
+        audio.src = CONFIG.musicSrc;
         audio.loop = true;
-        audio.volume = 0.5;
-        btn.addEventListener("click", () => {
-          if (audio.paused) {
-            audio
-              .play()
-              .then(() => btn.setAttribute("aria-pressed", "true"))
-              .catch(() => {
-                /* blocked; stay off */
-              });
-          } else {
-            audio.pause();
-            btn.setAttribute("aria-pressed", "false");
-          }
-        });
+        // ~2.6MB: guests who never unmute should not pay for it, so it is only
+        // fetched once playback is actually asked for.
+        audio.preload = "none";
+        audio.volume = 0;
+        const target = CONFIG.musicVolume ?? 0.4;
+
+        let fade = null;
+        const rampTo = (to, ms) => {
+          clearInterval(fade);
+          const from = audio.volume,
+            t0 = Date.now();
+          fade = setInterval(() => {
+            const k = Math.min(1, (Date.now() - t0) / ms);
+            audio.volume = Math.max(0, Math.min(1, from + (to - from) * k));
+            if (k === 1) clearInterval(fade);
+          }, 40);
+        };
+
+        const play = () => {
+          audio.volume = 0;
+          return audio
+            .play()
+            .then(() => {
+              btn.setAttribute("aria-pressed", "true");
+              rampTo(target, 1800); // no abrupt start
+            })
+            .catch(() => {
+              /* blocked or offline; stay off and let the guest press the toggle */
+            });
+        };
+        const stop = () => {
+          rampTo(0, 400);
+          setTimeout(() => audio.pause(), 420);
+          btn.setAttribute("aria-pressed", "false");
+        };
+
+        btn.addEventListener("click", () => (audio.paused ? play() : stop()));
+        musicStart = play;
       }
 
       /* ---------- calendar ----------
